@@ -5,8 +5,8 @@
 
 \documentclass[twoside,a4paper]{refart}
 \usepackage{makeidx}
-\usepackage{ifthen}
-% ifthen wird vom Bild von N.Beebe gebraucht!
+\usepackage{graphicx}
+\usepackage{array}
 \usepackage[unicode,a4paper]{hyperref} 
 \usepackage{color}
 \definecolor{edaccblue}{rgb}{0,0.2,0.6}
@@ -22,13 +22,15 @@
 \setcounter{ex}{1}
 \newcommand{\Eexample}{\color{green}Example \arabic{ex}:  \addtocounter{ex}{1}}
 
-\title{EDACC \\ %- Experiment Design and Administration for Computer Cluster- 
-User Guide\\ version 0.1
+\title{
+\begin{tabular}{>{\raggedright}m{4cm}>{\raggedleft}m{10cm}}
+%\begin{tabular}{|l|r|}
+EDACC \\User Guide \\version 0.1\\ & \includegraphics[scale=0.3]{edacclogo.jpg}
+\end{tabular}
 }
 
 \author{Copyright\copyright by  Adrian Balint, Daniel Diepold, Daniel Gall, Simon Gerber, Gregor Kapler, Robert Retz, Melanie Handel}
 \date{}
-
 
 \pagestyle{myfootings}
 \markboth{EDACC User Guide}%
@@ -40,6 +42,7 @@ User Guide\\ version 0.1
 \begin{document}
 
 \maketitle
+
 
 \begin{abstract}
         We present the main capabilities of EDACC and describe how to use EDACC for managing solvers and instances, create experiments with them, launch them on different computer clusters, monitor them and then analyze the results. 
