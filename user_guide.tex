@@ -7,16 +7,22 @@
 \usepackage{makeidx}
 \usepackage{ifthen}
 % ifthen wird vom Bild von N.Beebe gebraucht!
+\usepackage[unicode,a4paper]{hyperref} 
+\usepackage{color}
+\definecolor{edaccblue}{rgb}{0,0.2,0.6}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=edaccblue, menucolor=edaccblue, pagecolor=edaccblue, urlcolor=edaccblue}
+
 
 \def\bs{\char'134 } % backslash in \tt font.
 \newcommand{\ie}{i.\,e.,}
 \newcommand{\eg}{e.\,g..}
 \DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
-
-\title{EDACC \\ - Experiment Design and Administration for Computer Cluster- \\User Guide}
+\title{EDACC \\ %- Experiment Design and Administration for Computer Cluster- 
+User Guide	
+}
 \author{Adrian Balint, Daniel Diepold, Daniel Gall, Simon Gerber, Gregor Kapler, Robert Retz, Melanie Handel }
 \date{}
-\emergencystretch1em  %
+%\emergencystretch1em  %
 
 \pagestyle{myfootings}
 \markboth{EDACC User Guide}%
@@ -46,7 +52,7 @@
 
 \subsection{Getting started}
 Components of EDACC
-\index{Database}\marginlabel{DB}
+\index{Database}\marginlabel{DB:}
 Here we are going to describe the data that EDACC uses.
 \index{User Interface}\marginlabel{UI:}
 How to work with EDACC.
