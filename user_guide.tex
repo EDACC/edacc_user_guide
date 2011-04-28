@@ -10,24 +10,29 @@
 \usepackage[unicode,a4paper]{hyperref} 
 \usepackage{color}
 \definecolor{edaccblue}{rgb}{0,0.2,0.6}
-\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=edaccblue, menucolor=edaccblue, pagecolor=edaccblue, urlcolor=edaccblue}
+\definecolor{green}{rgb}{0,0.8,0.2}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=edaccblue, menucolor=edaccblue,pagecolor=edaccblue, urlcolor=edaccblue}
 
 
-\def\bs{\char'134 } % backslash in \tt font.
 \newcommand{\ie}{i.\,e.,}
 \newcommand{\eg}{e.\,g..}
-\DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
+\newcommand{\edacc}{\slshape EDACC}
+
+\newcounter{ex}
+\setcounter{ex}{1}
+\newcommand{\Eexample}{\color{green}Example \arabic{ex}:  \addtocounter{ex}{1}}
+
 \title{EDACC \\ %- Experiment Design and Administration for Computer Cluster- 
-User Guide	
+User Guide\\ version 0.1
 }
-\author{Adrian Balint, Daniel Diepold, Daniel Gall, Simon Gerber, Gregor Kapler, Robert Retz, Melanie Handel }
+
+\author{Copyright\copyright by  Adrian Balint, Daniel Diepold, Daniel Gall, Simon Gerber, Gregor Kapler, Robert Retz, Melanie Handel}
 \date{}
-%\emergencystretch1em  %
+
 
 \pagestyle{myfootings}
 \markboth{EDACC User Guide}%
          {EDACC User Guide}
-
 \makeindex 
 
 \setcounter{tocdepth}{2}
@@ -40,6 +45,7 @@ User Guide
         We present the main capabilities of EDACC and describe how to use EDACC for managing solvers and instances, create experiments with them, launch them on different computer clusters, monitor them and then analyze the results. 
 \end{abstract}
 
+disclaimer!
 
 \tableofcontents
 
@@ -47,32 +53,79 @@ User Guide
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Outline}
+Here we will have an overview of this user guide specifying where the user can find what!
 
 \section{Introduction}
+Specification of the problems algorithm engineers are often confronted with! \\
+\index{Algorithm engineering}\marginlabel{Algorithm engineering:}
+When designing and implementing algorithms one is at the end of the process confronted with the problem of evaluatating the implementation on the targeted problem set. As the authors of \edacc are familiar with algorithms for the satisfiability problem we will take this sort of algorithms as examples. After designing and implementing a SAT solver we would like to see how this performs on a set of instance problems (let us suppose that our solver is an implementation of a stochastic one \ie the result of the solver on the same instance will be a random variable).
+
+Normally we would start our solver on each instance and record the runtime or some quality measure. This is a sequential process and could be easily performed with the help of a simple shell script. But there are some questions that have to be answered before starting this evaluation process. 
+\begin{enumerate}
+\item How long is the solver allowed to compute on one instance?
+\item In the case of randomized solvers, how often do we call the solver on each problem set?
+\item Do we limit the resources used by the solver (\ie maximum of memory, maximum stack size)?
+\end{enumerate}
+
+
+What is the task?\\
+What are the tools?\\
+What would we like to achieve?
+
+Description of two example scenarios: 
+
+\marginlabel{\Eexample} See how the performance of a deterministic solver differs from other solvers!
+
+\marginlabel{\Eexample} 
+
+
+\subsection{What is EDACC}
+
+Describe the main tasks of EDACC, what is it for, what problems can be solved with EDACC?
+
+\subsection{System Requirements}
+
 
 \subsection{Getting started}
 Components of EDACC
+
 \index{Database}\marginlabel{DB:}
 Here we are going to describe the data that EDACC uses.
+
 \index{User Interface}\marginlabel{UI:}
 How to work with EDACC.
 
 \index{Client}\marginlabel{Client:} 
-The compute client is runing only on Unix-like operating systems. 
+
+
 \seealso{Chapter \ref{client}}
 For more details  about the requirements of the client and the command line see \ref{client}
 
 
-
-\subsection{System Requirements}
 \section{User Interface}
+
+\newpage
 \section{Client}
 \label{client}
+\input{client}
+
 \attention The client is running solely on Unix and is not distributed yet for Windows systems.
+
 \section{Web Frontend}
+
 \section{Monitor}
 
+\section{Troubleshooting}
 
+\section{Glossary}
+contains definitions of the most used terms within this document. 
+solver
+instance
+parameter
+algorithm
+deterministic vs. stochastic
+las vegas vs. monte carlo
 
 
 \printindex
