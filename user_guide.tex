@@ -1,0 +1,74 @@
+%EDACC - User guide
+%
+%
+%
+
+\documentclass[twoside,a4paper]{refart}
+\usepackage{makeidx}
+\usepackage{ifthen}
+% ifthen wird vom Bild von N.Beebe gebraucht!
+
+\def\bs{\char'134 } % backslash in \tt font.
+\newcommand{\ie}{i.\,e.,}
+\newcommand{\eg}{e.\,g..}
+\DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
+
+\title{EDACC \\ - Experiment Design and Administration for Computer Cluster- \\User Guide}
+\author{Adrian Balint, Daniel Diepold, Daniel Gall, Simon Gerber, Gregor Kapler, Robert Retz, Melanie Handel }
+\date{}
+\emergencystretch1em  %
+
+\pagestyle{myfootings}
+\markboth{EDACC User Guide}%
+         {EDACC User Guide}
+
+\makeindex 
+
+\setcounter{tocdepth}{2}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+        We present the main capabilities of EDACC and describe how to use EDACC for managing solvers and instances, create experiments with them, launch them on different computer clusters, monitor them and then analyze the results. 
+\end{abstract}
+
+
+\tableofcontents
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+\subsection{Getting started}
+Components of EDACC
+\index{Database}\marginlabel{DB}
+Here we are going to describe the data that EDACC uses.
+\index{User Interface}\marginlabel{UI:}
+How to work with EDACC.
+
+\index{Client}\marginlabel{Client:} 
+The compute client is runing only on Unix-like operating systems. 
+\seealso{Chapter \ref{client}}
+For more details  about the requirements of the client and the command line see \ref{client}
+
+
+
+\subsection{System Requirements}
+\section{User Interface}
+\section{Client}
+\label{client}
+\attention The client is running solely on Unix and is not distributed yet for Windows systems.
+\section{Web Frontend}
+\section{Monitor}
+
+
+
+
+\printindex
+
+\end{document}
