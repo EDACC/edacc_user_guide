@@ -5,9 +5,13 @@
 
 \documentclass[twoside,a4paper]{refart}
 \usepackage{makeidx}
+\usepackage{glossary}
+\makeglossary
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage[unicode,a4paper]{hyperref} 
+\usepackage[german]{babel}
+\usepackage[latin1]{inputenc}
 \usepackage{color}
 \definecolor{edaccblue}{rgb}{0,0.2,0.6}
 \definecolor{green}{rgb}{0,0.8,0.2}
@@ -17,6 +21,8 @@
 \newcommand{\ie}{i.\,e.,}
 \newcommand{\eg}{e.\,g..}
 \newcommand{\edacc}{\slshape EDACC}
+
+
 
 \newcounter{ex}
 \setcounter{ex}{1}
@@ -56,6 +62,31 @@ disclaimer!
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{User guide zum User Guide}
+\color{red} Bevor Ihr etwas in diesem user guide was reinschreiben wollt/sollt bitte diesen Kapitel durchlesen.
+\color{black}
+Alle Autoren sollten versuchen die folgenden Richlinien zu folgen, sodass die Arbeit ein homogenes Erscheinen bekommt auch wenn viele Autoren dran arbeiten. 
+\subsection{Darstellungskonventionen}
+Das ist ein User Guide, folglich sollten die wichtigen Informationen für den Benutzer sehr schnell auffindbar sein. 
+Dazu verhelfen folgende Konzepte:
+
+	\marginlabel{Index} Indexierung aller wichtigen Wörter; insbesondere Schlüsselwörter. Der Index und die pdf hyperreferenzen sollen ein schnelles brwosen ermöglichen. setzen von index wörter mit \verb|\index{wort}|.
+	
+	\marginlabel {Marginlabel} diese werden mit \verb|\marginlabel{schlüsselwort}| gesetzt. 
+	
+	\marginlabel{\Eexample} 	Mit \verb|\marginlabel{Eexample}| werden Beispiele eingeleitet. 
+	
+	\marginlabel{Verweise} Wenn man auf eine andere stelle im Text refenrenzueren will, was man so oft wie möglich machen sollte dann erscheint die Referenz auch im linken Rand mit: \verb|\seealso{label}|
+	
+	\marginlabel{Hinweise} Falls etwas doch sehr wichtig sein sollt, im Regel Besonderheiten auf die man achten sollte so kann man den Leser mit \attention \verb|\attention| darauf aufmerksam machen!
+	
+	\marginlabel{Glosareinträge} Wichtige Terme sollten am besten auch eine Definition haben, oder wenigstens eine Erklärung was damit gemeint ist. Das kann man am besten mit 
+	\verb|\glossary{name={Glossareintrag}, description={Beschreibung}}| \glossary{name={Glossareintrag},description={Das ist ein Eintrag in dem Glossar des Dokumnets!}}. 
+	
+\subsection{Inhaltliche Konventionen}	
+\marginlabel{Audienz identifizeren} Ich gehe 
+	
+
 \section{Outline}
 Here we will have an overview of this user guide specifying where the user can find what!
 
@@ -112,6 +143,7 @@ For more details  about the requirements of the client and the command line see 
 \section{Client}
 \label{client}
 \input{client}
+\clearpage
 
 \attention The client is running solely on Unix and is not distributed yet for Windows systems.
 
@@ -121,15 +153,13 @@ For more details  about the requirements of the client and the command line see 
 
 \section{Troubleshooting}
 
-\section{Glossary}
-contains definitions of the most used terms within this document. 
-solver
-instance
-parameter
-algorithm
-deterministic vs. stochastic
-las vegas vs. monte carlo
 
+
+\begin{fullpage}
+\stepcounter{section}
+\addcontentsline{toc}{section}{\numberline {\thesection} Glossar}
+\printglossary
+\end{fullpage}
 
 \printindex
 
