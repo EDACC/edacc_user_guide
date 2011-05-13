@@ -1,0 +1,115 @@
+\upshape
+\subsection{Introduction}
+The web frontend provides access to experiment information and analysis tools in a read-only manner
+and accessible by a web browser.
+
+\subsection{System requirements}
+The web frontend is implemented as Python WSGI web application and makes use of several libraries.
+Since it interfaces with R to draw plots it also depends on R and a Python interface to R, which unfortunately
+only works properly on Linux right now.
+WSGI applications can be deployed on a variety of web servers or even run standalone on a web server that comes with the
+Python standard library.
+The following list contains all dependencies and prerequisites of the web frontend (see below for installation instructions).
+\begin{itemize}
+\item Python 2.6.5 or 2.7 http://www.python.org
+\item R 2.11 (language for statistical computing and graphics)
+\item R package 'np' (available via R's CRAN)
+\item SQLAlchemy 0.6.5 (SQL Toolkit and Object Relational Mapper)
+\item mysql-python 1.2.3c1 (Python MySQL adapter)
+\item Flask 0.6 (Micro Webframework)
+\item Flask-WTF 0.3.3 (Flask extension for WTForms)
+\item Flask-Actions 0.5.2 (Flask extension)
+\item Werkzeug 0.6.2 (Webframework, Flask dependency)
+\item Jinja2 2.5 (Template Engine)
+\item PyLZMA 0.4.2 (Python LZMA SDK bindings)
+\item rpy2 2.1.4 (Python R interface)
+\item Numpy 1.5.1
+\item python-memcached v1.45 + memcached 1.4.5 (optional, enable/disable in config.py)
+\end{itemize}
+
+\subsection{Installation}
+To get rpy2 working the GNU linker (ld) has to be able to find libR.so. Add the folder containing
+libR.so (usually /usr/lib/R/lib) to the ld config: Create a file called R.conf containing the
+path in the folder /etc/ld.so.conf.d/ and run ldconfig without parameters as root to update.
+Additionally, you have to install the R package 'np' which provides non-parametric statistical
+methods. This package can be installed by running "install.packages('np')" within the R interpreter (as root).
+
+The following installation example outlines the step that have to be taken to install the web frontend on Ubuntu 10.04
+running on the Apache 2.2.14 web server.
+\marginlabel{\Eexample}
+\begin{enumerate}
+\item Install Apache and the WSGI module: \begin{verbatim}apt-get install apache2 libapache2-mod-wsgi\end{verbatim}
+\item{ Copy the web frontend files to /srv/edacc\_web/, create an empty error.log file and change their ownership to the Apache user: 
+\begin{verbatim}
+  touch /srv/edacc_web/error.log
+  chown www-data:www-data -R /srv/edacc_web
+\end{verbatim}
+}
+\item{ Create an Apache virtual host\\
+(new file at /etc/apache2/sites-available/edacc\_web)
+\begin{verbatim}
+<VirtualHost *:80>
+  ServerAdmin email@email.com
+  ServerName foo.server.com
+
+  LimitRequestLine 51200000
+
+  WSGIDaemonProcess edacc processes=1 threads=15
+  WSGIScriptAlias / /srv/edacc_web/edacc_web.wsgi
+
+  Alias /static/ /srv/edacc_web/edacc/static/
+
+  <Directory /srv/edacc_web>
+    WSGIProcessGroup edacc
+    WSGIApplicationGroup %{GLOBAL}
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+  <Directory /srv/edacc_web/edacc/static>
+    Order allow,deny
+    Allow from all
+  </Directory>
+</VirtualHost>
+\end{verbatim}
+}
+\item{Install dependencies and create a virtual environment for Python libraries:
+\begin{verbatim}
+apt-get install python-pip python-virtualenv python-scipy
+virtualenv /srv/edacc_web/env
+apt-get build-dep python-mysqldb
+apt-get install r-base
+echo "/usr/lib/R/lib" > /etc/ld.so.conf.d/R.config
+ldconfig
+source /srv/edacc_web/env/bin/activate
+pip install mysql-python
+pip install rpy2
+pip install flask flask-wtf flask-actions sqlalchemy pylzma numpy
+\end{verbatim}
+}
+\item{Install R libraries (''R'' launches the R interpreter):
+\begin{verbatim}
+R
+install.packages('np')
+\end{verbatim}
+}
+\item{Create a WSGI file at /srv/edacc\_web/edacc\_web.wsgi with the following contents:
+\begin{verbatim}
+import site, sys, os
+site.addsitedir('/srv/edacc_web/env/lib/python2.6/site-packages')
+sys.path.append('/srv/edacc_web')
+sys.path.append('/srv/edacc_web/edacc')
+os.environ['PYTHON_EGG_CACHE'] = '/tmp'
+sys.stdout = sys.stderr # mod_wsgi doesn't like anything on stdout
+from edacc.web import app as application
+\end{verbatim}
+}
+\item Configure the web frontend by editing /srv/edacc\_web/edacc/config.py
+\item{Enable the Apache virtual host created earlier:
+\begin{verbatim}
+a2ensite edacc_web
+service apache2 restart
+\end{verbatim}
+}
+\item The web frontend should now be running under http://foo.server.com/
+\end{enumerate}
