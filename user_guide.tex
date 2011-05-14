@@ -20,7 +20,7 @@
 
 \newcommand{\ie}{i.\,e.,}
 \newcommand{\eg}{e.\,g..}
-\newcommand{\edacc}{\slshape EDACC}
+\newcommand{\edacc}{\textit{EDACC} }
 
 
 
@@ -70,13 +70,14 @@ Alle Autoren sollten versuchen die folgenden Richlinien zu folgen, sodass die Ar
 Das ist ein User Guide, folglich sollten die wichtigen Informationen für den Benutzer sehr schnell auffindbar sein. 
 Dazu verhelfen folgende Konzepte:
 
-	\marginlabel{Index} Indexierung aller wichtigen Wörter; insbesondere Schlüsselwörter. Der Index und die pdf hyperreferenzen sollen ein schnelles brwosen ermöglichen. setzen von index wörter mit \verb|\index{wort}|.
+	\marginlabel{Index} Indexierung aller wichtigen Wörter; insbesondere Schlüsselwörter. Der Index und die pdf-hyperreferenzen sollen ein schnelles suchen ermöglichen. Setzen von index wörter mit \verb|\index{wort}|.
 	
-	\marginlabel {Marginlabel} diese werden mit \verb|\marginlabel{schlüsselwort}| gesetzt. 
+	Um wichtige Dinge schnell zu finden sollen auch seitliche Hinweise helfen. 
+	\marginlabel {seitlicher Hinweis auf} diese werden mit\\ \verb|\marginlabel{schlüsselwort}| gesetzt. 
 	
-	\marginlabel{\Eexample} 	Mit \verb|\marginlabel{Eexample}| werden Beispiele eingeleitet. 
+	 Auf Beispiele weist man am besten mit \verb|\marginlabel{\Eexample}| hin. \marginlabel{\Eexample}
 	
-	\marginlabel{Verweise} Wenn man auf eine andere stelle im Text refenrenzueren will, was man so oft wie möglich machen sollte dann erscheint die Referenz auch im linken Rand mit: \verb|\seealso{label}|
+	\marginlabel{Verweise} Wenn man auf eine andere stelle im Text refenrenzueren will, was man so oft wie möglich machen sollte dann erscheint die Referenz auch im linken Rand mit: \verb|\seealso{label}|. Wie zum Beispiel: Ein Überblick über diesen user-guide gibts in Kapitel \ref{outline} \seealso{Section \ref{outline}}.
 	
 	\marginlabel{Hinweise} Falls etwas doch sehr wichtig sein sollt, im Regel Besonderheiten auf die man achten sollte so kann man den Leser mit \attention \verb|\attention| darauf aufmerksam machen!
 	
@@ -84,10 +85,27 @@ Dazu verhelfen folgende Konzepte:
 	\verb|\glossary{name={Glossareintrag}, description={Beschreibung}}| \glossary{name={Glossareintrag},description={Das ist ein Eintrag in dem Glossar des Dokumnets!}}. 
 	
 \subsection{Inhaltliche Konventionen}	
-\marginlabel{Audienz identifizeren} Ich gehe 
+\marginlabel{Audienz identifizeren} Ich gehe davon aus, dass die meisten Leute die EDACC verwenden werden Informatiker sein werden, oder eine Unterart davon. Folglich können wir davon ausgehen, dass sie mit den gängisten Begriffe vertraut sind (Ein Glossareintrag zu diesen würde tortzdem nicht schaden). Der Benutzer wird immer als \textbf{user} im Text angesprochen. 
+\marginlabel{Verwendungsart des user-guides} Ich gehe auch davon aus, dass die meisten users diese Hilfe als Nachschlagewerk verwenden werden. Folglich soll auch der Inhalt task-orientiert sein. Das bedeutet dass man nicht das System an sich versucht zu beschreiben sondern die Aufgaben beschreibt und dadurch eher die Systembeschreibung entsteht. Es ist ungefähr das Gegenteil von dem Paper, wo nur die abstrakten Konzepte des Systems beschrieben worden sind. Also wenn Eure Doku zu sehr nach paper klingt seid ihr auf dem falschen Weg.
+
+\marginlabel{System definieren} Das System wenn es als Ganzes erwähnt wird sollte mit \textbf{EDACC} erwähnt werden. Allerdings sollte man vermeiden das Obersystem in Beschreibungen zu verwenden. Besser ist es wenn man sich immer auf dessen Teilkomponenten bezieht: \textbf{DB, GUI, client, WF}. \textbf{Monitor} wird nur als ein Teil des \textbf{WF} betrachtet.
+
+\marginlabel{Workflow angelehnte Beschreibung} Die Beschreibung der einzelenen Aufgaben sollte an dem typischen Workflow von EDACC orientiert sein. 
+Die allgeinen Konzepte und Probleme werden in der Anleitung sehr gut beschrieben sein. Im Hauptteil des user-guides sollen die Aufgaben beschrieben werden die man mit EDACC lösen kann. \marginlabel{Task-Beschreibung}Dabei achtet man auf:
+\begin{enumerate}
+	\item Identifizierung der Aufgaben (z.B:''Solver hinzufügen'')
+	\item Aufteilung der Aufgabe in Unteraufgaben: (z.B: ``Solver binaries verwalten und die Parameter spezifizieren'')
+	\item Jede Aufgabe wird in Schritten beschrieben die durchnummeriert werden. (z.B: 1. name des solvers eintragen 2. Author eintragen 3. Version (name und verison müssen eindeutig sein))
+	\item Fallunterscheidungen sollen explizit beschrieben werden wenn der Benutzer eine Entscheidung treffen muss (if-then-else Formulierungen). z.B: (Falls ein Parameter als Boolean markiert wird so ...) 
+	\item Reichlich refenrenzieren und  verweisen auf Glossar, Index und andere Stellen im Text wo  (verwandte / benötigte) ( Aufgaben / Konzepte ) beschrieben werden.
+\end{enumerate}
+
+
+
 	
 
 \section{Outline}
+\label{outline}
 Here we will have an overview of this user guide specifying where the user can find what!
 
 \section{Introduction}
