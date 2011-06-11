@@ -1,9 +1,11 @@
 \upshape
+\index{Web Frontend}
 \subsection{Introduction}
-The web frontend provides access to experiment information and analysis tools in a read-only manner
+The Web Frontend provides access to experiment information and analysis tools in a read-only manner
 and accessible by a web browser.
 
 \subsection{System requirements}
+\index{System requirements, Web Frontend}
 The web frontend is implemented as Python WSGI web application and makes use of several libraries.
 Since it interfaces with R to draw plots it also depends on R and a Python interface to R, which unfortunately
 only works properly on Linux right now.
@@ -23,11 +25,13 @@ The following list contains all dependencies and prerequisites of the web fronte
 \item Jinja2 2.5 (Template Engine)
 \item PyLZMA 0.4.2 (Python LZMA SDK bindings)
 \item rpy2 2.1.4 (Python R interface)
+\item PIL 1.1.7 (Python Imaging Library)
 \item Numpy 1.5.1
-\item python-memcached v1.45 + memcached 1.4.5 (optional, enable/disable in config.py)
+\item pygame 1.9 (Graphics library)
 \end{itemize}
 
 \subsection{Installation}
+\index{Installation, Web Frontend}
 To get rpy2 working the GNU linker (ld) has to be able to find libR.so. Add the folder containing
 libR.so (usually /usr/lib/R/lib) to the ld config: Create a file called R.conf containing the
 path in the folder /etc/ld.so.conf.d/ and run ldconfig without parameters as root to update.
@@ -35,7 +39,8 @@ Additionally, you have to install the R package 'np' which provides non-parametr
 methods. This package can be installed by running "install.packages('np')" within the R interpreter (as root).
 
 The following installation example outlines the step that have to be taken to install the web frontend on Ubuntu 10.04
-running on the Apache 2.2.14 web server.
+running on the Apache 2.2.14 web server. For performance reasons (e.g. query latency) the web frontend should run on the
+same machine that the EDACC database runs on.
 \marginlabel{\Eexample}
 \begin{enumerate}
 \item Install Apache and the WSGI module: \begin{verbatim}apt-get install apache2 libapache2-mod-wsgi\end{verbatim}
@@ -75,7 +80,7 @@ running on the Apache 2.2.14 web server.
 }
 \item{Install dependencies and create a virtual environment for Python libraries:
 \begin{verbatim}
-apt-get install python-pip python-virtualenv python-scipy
+apt-get install python-pip python-virtualenv python-scipy python-pygame python-imaging
 virtualenv /srv/edacc_web/env
 apt-get build-dep python-mysqldb
 apt-get install r-base
@@ -84,7 +89,8 @@ ldconfig
 source /srv/edacc_web/env/bin/activate
 pip install mysql-python
 pip install rpy2
-pip install flask flask-wtf flask-actions sqlalchemy pylzma numpy
+pip install flask flask-wtf flask-actions
+pip install sqlalchemy pylzma numpy
 \end{verbatim}
 }
 \item{Install R libraries (''R'' launches the R interpreter):
@@ -100,11 +106,11 @@ site.addsitedir('/srv/edacc_web/env/lib/python2.6/site-packages')
 sys.path.append('/srv/edacc_web')
 sys.path.append('/srv/edacc_web/edacc')
 os.environ['PYTHON_EGG_CACHE'] = '/tmp'
-sys.stdout = sys.stderr # mod_wsgi doesn't like anything on stdout
+sys.stdout = sys.stderr
 from edacc.web import app as application
 \end{verbatim}
 }
-\item Configure the web frontend by editing /srv/edacc\_web/edacc/config.py
+\item Configure the web frontend by editing /srv/edacc\_web/edacc/config.py, see~\ref{wf:configuration} for details.
 \item{Enable the Apache virtual host created earlier:
 \begin{verbatim}
 a2ensite edacc_web
@@ -113,3 +119,13 @@ service apache2 restart
 }
 \item The web frontend should now be running under http://foo.server.com/
 \end{enumerate}
+
+\subsection{Configuration}
+\label{wf:configuration}
+\index{Configuration, Web Frontend}
+All configuration is done in a Python file located at ''edacc/config.py''. The options are documented in the sample configuration
+file which is included in the distribution package.\attention Most importantly, you should disable debugging mode when making the Web Frontend
+accessible from the network to avoid security problems. At the end of the file you can configure the database connection and the list
+of EDACC databases that should be made available by the Web Frontend.
+
+\subsection{Feature overview}
