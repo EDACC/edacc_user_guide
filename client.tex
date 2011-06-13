@@ -133,6 +133,7 @@ that your possible result codes are specified in the \textit{ResultCodes} table 
 the web frontend and GUI application consider status codes that begin with a decimal ''1'' as correct answers.
 
 \subsection{Experiment priorization}
+\label{sec:experiment_priorization}
 Sometimes it can be useful to compute several experiments in parallel but give some a higher priority than others. In order to accomplish that, experiments can be marked as inactive and individual jobs can be prioritized. Only jobs of active experiments with priority equal to or greater than 0 are considered for processing
 by the client. Futhermore, experiments can be assigned a priority. The clients will then try to match the relative number of CPUs working on an experiment with its relative priority to
 all other experiments that are assigned to the same grid queue. For example, if you have three experiments with priorities 100, 200 and 300 respectively the running clients will try to have 16\% of CPUs working on the first, 33\% of CPUs working on the second and 50\% of CPUs working on the third experiment.

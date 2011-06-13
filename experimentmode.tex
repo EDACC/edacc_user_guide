@@ -1,0 +1,66 @@
+% !TeX root = user_guide.tex
+\subsection{Experiment Mode}
+\subsubsection{Experiments}
+\marginlabel{Experiment}\index{Experiment}\index{create/remove/edit experiments}
+An experiment consists of solver configurations, instances and the number of runs for each solver configuration and instance. In the experiment tab the user can create/remove/edit experiments.
+
+\marginlabel{Create}
+By using the create-button in the first tab of the experiment mode an experiment can be created. This will open a dialog where you have to provide some data.
+\begin{enumerate}
+\item Name: the name for the new experiment
+\item Description: a description for the experiment. Provide some useful information about the experiment to quickly identify experiments in the experiments table.
+\end{enumerate}
+After pressing the create-button the newly created experiment will be loaded automatically.
+
+\marginlabel{Remove}
+To remove an experiment use the appropriate button.
+
+\marginlabel{Edit}
+To edit an experiment use the appropriate button. There you can edit the data you provided by creating the experiment. If you want to change the priority of an experiment you can do this by directly editing this property in the experiment table. The same applies to activating and deactivating experiments. For more details about the effect of the priority property, see section \ref{sec:experiment_prioritization}. Deactivated experiments won't be computed by clients.
+
+\marginlabel{Discard}
+To discard an experiment use the appropriate button. This button is only available if an experiment is loaded.
+
+\marginlabel{Load}
+To load an experiment use the appropriate button or double click the experiment you want to load in the experiment table.
+
+\marginlabel{Import}\label{sec:import_data_from_experiments}
+It is possible to import data from other experiments. To import data from other experiments the following steps have to be applied:
+\begin{enumerate}
+\item Load the experiment you want to import data to
+\item Press the import button in the experiment tab. This will open a new window with three tables for experiments, solver configurations and instances.
+\item Select the experiments you want to import data from. This will update the solver configuration and instance tables to show all solver configurations and instances for the selected experiments. Orange rows mean that the solver configuration or instance in that row exists in the currently loaded experiment. Two solver configurations are considered as equal if they have the same solver binary associated and have the same launch parameters.
+\item Select the solver configurations and instances to import
+\item Select \textit{import finished jobs} if you also want to import jobs
+\item Press \textit{Import} 
+
+\attention Note that this action might generate new jobs. This \textit{might} happen if you import solver configurations and instances with their jobs to an experiment where some of the solver configurations and instances actually exist and they are in the \textit{same seed group}.
+\end{enumerate}
+\subsubsection{Client Browser}
+The client browser represents all clients currently connected to the database. Red rows denote dead clients. \marginlabel{Dead clients}A client is considered as dead if the client didn't communicate with the database for a period of time.
+
+The client browser also deals as the only way to directly communicate with clients. 
+
+\marginlabel{Kill clients}After selecting the clients you can open the context menu with the right mouse button and select \textit{Kill Clients Hard} or \textit{Kill Clients Soft}. Hard means that the clients will terminate all currently computing jobs and sign off. Soft means that the clients won't start new jobs and will wait for the currently computing jobs to finish.
+
+\marginlabel{Client details}To view the jobs which a client has computed in his lifetime you can double click a client entry in the client table. This will show a dialog with a table containing all jobs the client calculated and is currently calculating. You can also send messages to the clients in this dialog.
+\subsubsection{Solvers}
+\index{Solver configuration}Creating solver configurations is done in the solvers tab. This tab contains two tables on the right side and a panel with all solver configurations currently associated with this experiment.
+\marginlabel{Choosing solvers}To create solver configurations you have to choose solvers for which you want create solver configurations. This can be done in the first table, the solvers table. By selecting some solvers and finally pressing the \textit{choose}-button, solver configuration prototypes will be created for the solvers. You can see the newly created solver configurations in the panel in the left side. This panel is organized as follows. For each solver exists one layer. Each layer contains all solver configuration for the associated solver. A solver configuration is titled with a name. This name can be changed and is used in the other areas of the GUI to identify a solver configuration. So it might be good practice to choose different names for the solver configurations in an experiment.
+
+\marginlabel{Modifying solver configurations}A solver configuration consists of a solver binary, parameters and a seed group. The solver binary is chosen in the first combo box. The parameters can be specified in the parameters table. Just select the parameters you want for this solver configuration and specify their values if the have some. Finally you have to specify the seed group. The default seed group is \textit{0}. You might want to change that. See section \ref{section:seed_groups} for more information about seed groups.
+
+\marginlabel{Importing solver configurations}To import solver configurations from other experiments you can import them in the experiments tab (see section \ref{sec:import_data_from_experiments}) or if you just want to import a solver configuration without jobs for a solver, you can select the solver in the solver table which will show all solver configurations in the database for that solver in the solver configuration table. Simply select the solver configurations you want to import and press the \textit{choose}-button.
+
+\marginlabel{Tabular view for solver configurations}To change the view of the solver configuration panel to a tabular view, press the \textit{Change View}-button. This will change the panel into a table. Here you can remove multiple solver configurations by selecting them and opening the context menu by pressing the right mouse button and choose \textit{Remove}. It is also possible to edit solver configurations in that view by double clicking a solver configuration or by using the context menu.
+
+\attention All modifications to solver configurations are not directly saved in the database. You can use the \textit{Undo}-button the undo all changes and load the last save state. By pressing the save button all modified and new solver configurations will be saved to and deleted solver configurations will be removed from the database.
+
+\attention Modifying and saving solver configurations which have calculated runs might be not a good idea. Therefore the GUI supplies a possibility to reset the affected jobs. This might not be needed if the changed parameters have no effects to the results.
+\subsubsection{Instances}
+
+\subsubsection{Generate Jobs}
+
+\subsubsection{Job Browser}
+
+\subsubsection{Analysis}
