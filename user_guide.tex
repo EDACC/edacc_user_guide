@@ -12,11 +12,26 @@
 \usepackage[unicode,a4paper]{hyperref} 
 \usepackage[german]{babel}
 \usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{color}
 \definecolor{edaccblue}{rgb}{0,0.2,0.6}
 \definecolor{green}{rgb}{0,0.8,0.2}
 \hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=edaccblue, menucolor=edaccblue,pagecolor=edaccblue, urlcolor=edaccblue}
 
+
+\newtheoremstyle{dotless} % Name
+                        {0.5em}    % Space above
+                        {0.5em}    % Space below
+                        {}         % Body font
+                        {}         % Indent amount
+                        {\bfseries}% Theorem head font
+                        {:}        % Punctuation after theorem head
+                        {\newline} % Space after theorem head
+                        {}         % Theorem head spec (can be left empty, meaning 'normal')
+
+\theoremstyle{dotless}
+\newtheorem{definition}{Definition}[section]
 
 \newcommand{\ie}{i.\,e.,}
 \newcommand{\eg}{e.\,g..}
@@ -157,6 +172,15 @@ For more details  about the requirements of the client and the command line see 
 
 \section{User Interface}
 \input{experimentmode}
+
+\newpage
+\section{Parameter search space specification [Draft]}
+\label{parameter_spec}
+\input{parameter_spec}
+\clearpage
+
+
+
 \newpage
 \section{Client}
 \label{client}
