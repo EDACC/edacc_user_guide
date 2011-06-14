@@ -11,7 +11,7 @@ Since it interfaces with R to draw plots it also depends on R and a Python inter
 only works properly on Linux right now.
 WSGI applications can be deployed on a variety of web servers or even run standalone on a web server that comes with the
 Python standard library.
-The following list contains all dependencies and prerequisites of the web frontend (see below for installation instructions).
+The following list contains all dependencies and prerequisites of the Web Frontend (see \ref{wf:installation} for installation instructions).
 \begin{itemize}
 \item Python 2.6.5 or 2.7 http://www.python.org
 \item R 2.11 (language for statistical computing and graphics)
@@ -31,12 +31,13 @@ The following list contains all dependencies and prerequisites of the web fronte
 \end{itemize}
 
 \subsection{Installation}
+\label{wf:installation}
 \index{Installation, Web Frontend}
 To get rpy2 working the GNU linker (ld) has to be able to find libR.so. Add the folder containing
 libR.so (usually /usr/lib/R/lib) to the ld config: Create a file called R.conf containing the
 path in the folder /etc/ld.so.conf.d/ and run ldconfig without parameters as root to update.
 Additionally, you have to install the R package 'np' which provides non-parametric statistical
-methods. This package can be installed by running "install.packages('np')" within the R interpreter (as root).
+methods. This package can be installed by running ''install.packages('np')'' within the R interpreter (as root).
 
 The following installation example outlines the step that have to be taken to install the web frontend on Ubuntu 10.04
 running on the Apache 2.2.14 web server. For performance reasons (e.g. query latency) the web frontend should run on the
@@ -80,7 +81,8 @@ same machine that the EDACC database runs on.
 }
 \item{Install dependencies and create a virtual environment for Python libraries:
 \begin{verbatim}
-apt-get install python-pip python-virtualenv python-scipy python-pygame python-imaging
+apt-get install python-pip python-virtualenv python-scipy
+apt-get install python-pygame python-imaging
 virtualenv /srv/edacc_web/env
 apt-get build-dep python-mysqldb
 apt-get install r-base
@@ -124,8 +126,69 @@ service apache2 restart
 \label{wf:configuration}
 \index{Configuration, Web Frontend}
 All configuration is done in a Python file located at ''edacc/config.py''. The options are documented in the sample configuration
-file which is included in the distribution package.\attention Most importantly, you should disable debugging mode when making the Web Frontend
-accessible from the network to avoid security problems. At the end of the file you can configure the database connection and the list
-of EDACC databases that should be made available by the Web Frontend.
+file which is included in the distribution package. Please read through the configuration options and modify those marked as important \attention.
+Most importantly, you should disable debugging mode and change the secret key when making the Web Frontend
+accessible from the network to avoid security problems. Logging is also quite useful to make it easier to find the cause of bugs in the application.
+\marginlabel{Database configuration}At the end of the file you can configure the database connection and the list of EDACC databases that should be
+made available by the Web Frontend.
 
-\subsection{Feature overview}
+\subsection{Troubleshooting}
+\label{wf:troubleshooting}
+\index{Troubleshooting, Web Frontend}
+When there are errors or bugs and you have set up the Web Frontend under Apache as described in the installation section, Apache will display an ''Internal Server Error'' page.
+If you have configured logging, the application will write tracebacks to the logging file. If you haven't set up logging, these tracebacks will end up
+in Apache's error.log file.
+
+\subsection{Features}
+This section gives a short overview of the features of the Web Frontend. Most features should be self-explanatory or have some additional documentation
+on the pages themself.
+
+The Web Frontend was designed as monitoring and analysis tools of experiments that are created with the GUI application. Once you have set up some databases and added
+them to the configuration file of the Web Frontend, the top level page will allow the user to select one of the databases. This leads to a page that displays
+all experiments of the chosen database and some basic information about their creation date, number of solvers, instances and jobs.
+
+\marginlabel{Experiments}
+An experiment page displays further information about the experiment, such as the number of total, running and crashed jobs. If the experiment is currently
+being computed, an estimation of the time of completion is displayed next to ''ETA''.
+
+\marginlabel{Monitor progress}
+Under ''Progress'' a colored bar visualizes the computation progress.
+Green color corresponds to finished jobs, red to crashed jobs and orange to jobs that are currently being computed. The links following the progress bar
+lead to information and analysis pages.
+
+\index{Computation progress, Web Frontend}
+\marginlabel{Job browser}
+The progress page provides a job browser similar to the GUI application. It allows to sort, filter for certain words, show and hide specific columns and download
+currently displayed data in CSV (comma-separated values) format\marginlabel{Export data}. Displaying more than 1000 results at once can become rather slow, since the browser's Javascript
+engine has to do a lot of processing to color and format the table.
+
+The solver configurations and instances pages show the solver configurations and instances that are part of the experiment. The instances page provides a download link
+for all instance files in a tarball\marginlabel{Download instances}.
+Instances are shown in a table by name, MD5 checksum and their properties (TODO reference), if there are any. The instance name links to a page that displays the 
+first and last few characters of the instance file and provides a download link.
+
+\marginlabel{View results}
+\index{Results}
+\index{Export results}
+The result pages display the results of the jobs in various formats. ''Unsolved instances'' and ''Solved instances'' list the instances that
+were not solved by any solver or solved by at least one solver respectively. ''By solver configuration'' leads to a page, where after selecting a solver configuration
+that is part of the experiment a table is displayed containing all the results of the jobs of the solver configuration by instance and run number.
+''By instance'' leads to a page, where after selecting an instance all results obtained on this instance are displayed by solver configuration and run number.
+\marginlabel{Export results}All tables can be exported (i.e. downloaded) in CSV format.
+
+\marginlabel{Analyse results}
+\index{Analysis}
+\index{Statistical tools}
+\index{Visualization}
+\index{Plots}
+Analysis pages provide various plots of results and statistical tools such as correlation and probabilistic domination calculations. All plots can be directly saved
+in PNG format as they are displayed in the browser or downloaded in PDF or EPS format\marginlabel{Export plots}\index{Export plots}. For some plots the application generates an R script which can be adjusted as
+neccessary.
+Most plots allow to download the underlying data in CSV format.
+
+Some plots allow the selection of multiple instances. In this case, you can use a filter to narrow the selection of the instances listed. Please refer to the example
+which is displayed next to the filter text field.
+
+\marginlabel{Ranking of solver configurations}
+\index{Ranking}
+The ranking is determined by the number of successful runs but the ranking table can be sorted by any of the displayed measures.
