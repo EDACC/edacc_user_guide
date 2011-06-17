@@ -15,6 +15,8 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{color}
+\usepackage{comment}
+
 \definecolor{edaccblue}{rgb}{0,0.2,0.6}
 \definecolor{green}{rgb}{0,0.8,0.2}
 \hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=edaccblue, menucolor=edaccblue,pagecolor=edaccblue, urlcolor=edaccblue}
@@ -69,7 +71,7 @@ EDACC \\User Guide \\version 0.1\\ & \includegraphics[scale=0.3]{edacclogo.jpg}
         We present the main capabilities of EDACC and describe how to use EDACC for managing solvers and instances, create experiments with them, launch them on different computer clusters, monitor them and then analyze the results. 
 \end{abstract}
 
-disclaimer!
+
 
 \tableofcontents
 
@@ -77,7 +79,8 @@ disclaimer!
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{User guide zum User Guide}
+\begin{comment}
+\section*{User guide zum User Guide}
 \color{red} Bevor Ihr etwas in diesem user guide was reinschreiben wollt/sollt bitte diesen Kapitel durchlesen.
 \color{black}
 Alle Autoren sollten versuchen die folgenden Richlinien zu folgen, sodass die Arbeit ein homogenes Erscheinen bekommt auch wenn viele Autoren dran arbeiten. 
@@ -115,7 +118,7 @@ Die allgeinen Konzepte und Probleme werden in der Anleitung sehr gut beschrieben
 	\item Reichlich refenrenzieren und  verweisen auf Glossar, Index und andere Stellen im Text wo  (verwandte / benötigte) ( Aufgaben / Konzepte ) beschrieben werden.
 \end{enumerate}
 
-
+\end{comment}
 
 	
 
@@ -124,32 +127,46 @@ Die allgeinen Konzepte und Probleme werden in der Anleitung sehr gut beschrieben
 Here we will have an overview of this user guide specifying where the user can find what!
 
 \section{Introduction}
-Specification of the problems algorithm engineers are often confronted with! \\
-\index{Algorithm engineering}\marginlabel{Algorithm engineering:}
-When designing and implementing algorithms one is at the end of the process confronted with the problem of evaluatating the implementation on the targeted problem set. As the authors of \edacc are familiar with algorithms for the satisfiability problem we will take this sort of algorithms as examples. After designing and implementing a SAT solver we would like to see how this performs on a set of instance problems (let us suppose that our solver is an implementation of a stochastic one \ie the result of the solver on the same instance will be a random variable).
 
-Normally we would start our solver on each instance and record the runtime or some quality measure. This is a sequential process and could be easily performed with the help of a simple shell script. But there are some questions that have to be answered before starting this evaluation process. 
+\index{Algorithm engineering}\marginlabel{Algorithm engineering:}
+When designing and implementing algorithms one is at the end of the process confronted with the problem of evaluating the implementation on the targeted problem set. As the authors of \edacc are familiar with algorithms for the satisfiability problem we will take this sort of algorithms as examples. After designing and implementing a SAT solver we would like to see how this performs on a set of instance problems (let us suppose that our solver is an implementation of a stochastic one \ie the result of the solver on the same instance will be a random variable).
+
+Normally we would start our solver on each instance and record the runtime or some quality measure. This is a sequential process and could be easily performed with the help of simple shell script. But there are some questions that have to be answered before starting the evaluation process. 
+
 \begin{enumerate}
-\item How long is the solver allowed to compute on one instance?
+\item How long is the solver allowed to compute on one instance? And how do we restrict that?
 \item In the case of randomized solvers, how often do we call the solver on each problem set?
 \item Do we limit the resources used by the solver (\ie maximum of memory, maximum stack size)?
 \end{enumerate}
 
+Let us now suppose we would like to test our SAT-solver on 100 instances where we allow a timeout of 200 seconds. \marginlabel{\Eexample}  Because of the stochastic nature of the solver we are going to tun it for 100 times on each instances. We are not going to limit other resources. Now we get a set of (100 instances) $\times$ (100 runs) that produces a set of 10000 jobs. Having a timeout limit of 200 seconds our computation could take up to $10000\cdot 200=2000000sec\cong24 days$ on a single CPU machine in worst case. 
 
-What is the task?\\
-What are the tools?\\
-What would we like to achieve?
+Now everybody has access to multi-core machines or even some clusters with multiple CPU's. So we could speed up the computation by using this sort of resources but then we get the problem of equally spreading our jobs. And more than that we have to collect the results after that and process them with some statistical tools. 
 
-Description of two example scenarios: 
+Most of the researchers solve this problems by writing a collection of scripts. This solution is error-prone and time consuming because there is no very simple way to equally spread jobs across multiple machines. Collecting the results and merging them together also can also yield a not negligible amount of work. 
+One more disadvantage is that the results can be seldom reproduced without having the complete set of scripts and even then there might be some steps that are not incorporated within the scripts. 
 
-\marginlabel{\Eexample} See how the performance of a deterministic solver differs from other solvers!
+To solve this problems we have designed \edacc. The main goal of \edacc is to:
+\begin{enumerate}
+	\item manage solvers and instances and archiving them in a database with the help of a GUI
+	\item create experiment settings by configuring solvers and selecting the instances
+	\item evaluating the jobs of an experiment on arbitrary many machines
+	\item provide analysis tools for the results
+	\item provide an online tool to monitor and analyze experiments
+\end{enumerate}
 
-\marginlabel{\Eexample} 
 
 
 \subsection{What is EDACC}
+EDACC consists of four major components:
+\begin{enumerate}
+	\item Grapical user interface (GUI)
+	\item Database (DB)
+	\item Compute client (client)
+	\item Web frontend (WF)
+\end{enumerate}
 
-Describe the main tasks of EDACC, what is it for, what problems can be solved with EDACC?
+
 
 \subsection{System Requirements}
 
