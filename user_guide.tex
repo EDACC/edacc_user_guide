@@ -1,16 +1,12 @@
-%EDACC - User guide
-%
-%
-%
-
 \documentclass[twoside,a4paper]{refart}
+
 \usepackage{makeidx}
 \usepackage{glossary}
 \makeglossary
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage[unicode,a4paper]{hyperref} 
-\usepackage[german]{babel}
+%\usepackage[german]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -155,36 +151,32 @@ To solve this problems we have designed \edacc. The main goal of \edacc is to:
 	\item provide an online tool to monitor and analyze experiments
 \end{enumerate}
 
-
-
 \subsection{What is EDACC}
+\marginlabel{\edacc Components}
 EDACC consists of four major components:
 \begin{enumerate}
-	\item Grapical user interface (GUI)
+	\item Grapical user interface (GUI) 
 	\item Database (DB)
-	\item Compute client (client)
-	\item Web frontend (WF)
+	\item Compute client (client) 
+	\item Web frontend (WF) (optional)
 \end{enumerate}
-
-
 
 \subsection{System Requirements}
 
+\begin{enumerate}
+	\item GUI - Sun Java from version ... \attention
+	\item DB - MySQL version ... or above \attention
+	\item client - see section \ref{clientSR} \attention
+	\item Web frontend - see section \ref{wfSR} \attention
+\end{enumerate}
 
 \subsection{Getting started}
-Components of EDACC
 
-\index{Database}\marginlabel{DB:}
-Here we are going to describe the data that EDACC uses.
-
-\index{User Interface}\marginlabel{UI:}
-How to work with EDACC.
-
-\index{Client}\marginlabel{Client:} 
-
-
-\seealso{Chapter \ref{client}}
-For more details  about the requirements of the client and the command line see \ref{client}
+\begin{enumerate}
+	\item Setting up a MySQL Database: \marginlabel{MySQL database}. As all solvers, instances and results are permanentaly saved within the database you have to have a MySQL server to use \edacc. The performance of \edacc is highly dependet from the DB-server. 
+	
+	
+\end{enumerate}
 
 
 \section{User Interface}
