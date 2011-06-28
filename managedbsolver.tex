@@ -1,1 +1,72 @@
 % !TeX root = managedbmode.tex
+\marginlabel{Solvers} A solver is a program which implements an algorithm for solving a problem. In EDACC a solver is represented by the following information:
+\begin{enumerate}
+ \item[Name] A human-readable name of the solver.
+ \item[Version] The version number of the solver. The combination of name and version must be unique.
+ \item[Description] A short description of the solver.
+ \item[Authors] The list of the authors of a solver.
+ \item[Code] The sourcecode of the solver.
+ \item[Several Binaries] A solver can consist of different binaries, which have the same source code but differ in the compile options (eg. the architecture) or the chosen compiler version. There must be at least one solver binary.
+\end{enumerate}
+
+\marginlabel{Parameters} Every solver has a list of several parameters which control its behaviour. To build a valid parameter list string, EDACC needs the following information:
+\begin{enumerate}
+ \item[name] The human-readable internal name of the parameter. This name has no effect to the generated command-line and is only needed for reasons of indentification in the EDACC system.
+ \item[prefix] The parameter prefix defines how the parameter is called on the command-line. The Unix program \verb|ls| for example has a parameter with the prefix \verb|-l|.
+ \item[Boolean] Some parameters don't have an actual value but act as switches for a certain functionality of a solver. The \verb|-l| parameter of the Unix program \verb|ls| for example is such a boolean parameter.
+ \item[Mandatory] Some parameters need to be specified to start the solver binary. Such parameters are called mandatory.
+ \item[Space]
+ \item[Order] Some solvers need a special order of the parameters. This order is specified by an ascending number. The parameter with the smallest number will be used first in the command-line string. If two parameters have the same order number, the order between those two parameters doesn't matter.
+\end{enumerate}
+
+\marginlabel{Add Solver}
+By clicking the button ``New'' in the solver panel a new empty line in the solver table is created. To fill the new entry with information fill in the form below the table with the static information of the solver. Optionally you can attach the code of the solver to the entry by clicking on ``Add Code'' and choosing the files or directories from your file system. 
+
+\attention To create a valid solver entry, it is necessary to specify at least one solver binary.
+
+\marginlabel{Add Solver Binary}
+The table below the text fields with the static solver information shows the solver binaries which are already attached to the chosen solver. To add another binary, click on the ``Add'' button below the table with the binaries. Choose the binary files which are needed to run the solver from your file system. EDACC then tries to zip the chosen files. This can take a few seconds. 
+
+To complete the process, some information on the binary have to be given:
+\begin{itemize}
+ \item[Alternative Binary Name] A human-readable name of the binary. This information is only needed that the binary can be recognized by the user in the program.
+ \item[Execution File] The main file of the binary, which will be called by the EDACC client to start the binary. You can choose it from the list of the previously chosen binary files. For default, the first file is chosen.
+ \item[Additional run command] Some binaries or scripts need a special command to start them (this is very usual for interpreted languages or scripts). For example a Java JAR archive can be started by the additional run command \verb|java -jar|. A preview of the command executed on the grid by the client is shown in the text line below the text field for the addtional run command.
+ \item[Version] The version string specifies for example the architecture of the compiled binary or the used compiler. The version of the underlying source code is specified in the solver information, which is described above!
+\end{itemize}
+
+Click on ``Add binary'' to complete the process.
+
+\attention All modifications on solvers, solver binaries or parameters are not directly saved to the database. To persist your changes, you can choose the button ``Save To DB''.
+
+\marginlabel{Edit Solver} 
+To edit the information of a certain solver, choose the solver from the solver table. The text fields below the table will show the currently saved information of the solver. By changing those values, the information in the solver table will be adjusted automatically.
+
+\marginlabel{Edit Solver Binary}
+
+\marginlabel{Delete Solver Binary} 
+To delete a solver binary, choose it in the list of binaries and click on the ``Delete''-Button below the table.
+\attention After confirming the delete action, the solver binary will be removed directly from the database!
+
+\marginlabel{Delete Solver}
+If you want to delete a solver with all attached information, code, binaries and parameter, click on the ``Delete''-Button in the solver panel. The solver will be removed directly from the database, after confirming the delete action. To delete multiple solvers at once, just hold \verb|Ctrl| in the solver table.
+
+\marginlabel{Add Parameter}
+To add a parameter to a solver, choose the solver from the solver table. On the parameters panel, the list of parameters will show all parameters of the chosen solver. By clicking on ``New'' in the parameter panel, a new empty line will appear in the parameters table and is selected automatically. The text fields and checkboxes below the tab show the default values created for the new parameter. To change them, simply change the values in those control fields. The information in the table will adjust automatically. For your comfort, the order value will be incremented automatically by creating a new parameter.
+\attention Changes on the parameter panel won't take effect until you chose the button ``Save To DB''.
+
+\marginlabel{Edit Parameter}
+If you want to edit the information of a parameter, first chose the solver whose parameters you want to edit from the solver table. Then coose the parameter you like to edit and modify the information in the text fields below the table. Click ``Save To DB'' to persist your changes in the database.
+
+\marginlabel{Delete Parameter}
+To delete parameters of a solver, choose the solver and the parameter you want to delete (by holding \verb|Ctrl| in the parameter table, you can select multiple parameters). Click on ``Delete'' in the parameter panel.
+\attention The delete action is performed immediately on the database! All your changes will be lost!
+
+\marginlabel{Save changes to DB}
+Adding and Editing solver, binary or parameter information will take effect to the database by choosing the button ``Save To DB''.
+
+\marginlabel{Export}
+To export the solver code and the binaries of a solver, choose the solver from the solver table and click on ``Export''. After selecting the directory where the exported files should be saved, EDACC creates a bunch of zip files with the exported code and binaries from the database.
+
+\marginlabel{Reload from DB}
+If you like to undo your changes you haven't already commited to the database by choosing ``Save To DB'', you can click on ``Reload from DB''. This has the effect that all information in the program will be stashed and reloaded from the database, so your uncommited changes will be lost.
