@@ -124,6 +124,45 @@ Here we will have an overview of this user guide specifying where the user can f
 
 \section{Introduction}
 
+\subsection{General terms - definitions}
+To keep this user-guide consistent we would like to define a couple of terms:
+\begin{definition}{Algorithm}
+	We define an algorithm as an arbitrary computation method. \marginlabel{Algorithm}
+\end{definition}
+
+\begin{definition}{(Problem) Instance}
+	We define a (problem) instance as the instantiation of a problem.  \marginlabel{Instance}
+\end{definition}
+
+\begin{definition}{Instance property}
+	We define an instance property as an arbitrary information that can be computed from the instance.  \marginlabel{Instance Property}
+\end{definition}
+
+\begin{definition}{Solver}
+	We define a solver as the implementation of an algorithm in an arbitrary programming language. \marginlabel{Solver} A solver has an input and an output. One of the input of the solver is the instance.
+\end{definition}
+
+\begin{definition}{Solver Parameters}
+	The behavior of a solver can be controlled by some parameters that also act like an input to the solver. \marginlabel{Solver Parameters}
+\end{definition}
+
+\begin{definition}{Solver Configuration}
+	A solver together with a set of fixed values for its parameters is called a solver configuration. \marginlabel{Solver Configuration}
+\end{definition}
+
+\begin{definition}{Computing System}
+	\marginlabel{Computing System}
+\end{definition} We define a computing system as the computer, computer cluster, or grid on which a solver is executed.  
+
+
+
+
+Before describing the main components some entities that will be used through the rest of the paper are defined. A \textit{solver} is an implementation of an algorithm that works on some input and has an output. The behavior of a solver is controlled by arbitrarily many \textit{parameters}. A solver together with some fixed parameters is called a \textit{solver configuration}. The input to a solver is called an \textit{instance}. Any information that can be computed from an instance is called an \textit{instance property}. 
+%For example \textit{TSAT} is a solver implementing the tabu search algorithm, has as parameters the tabu-tenure and is solving SAT-problems. 
+A \textit{computing system} is defined as the computer, computer cluster, or grid on which a solver is tested. When running a solver on a computing system \textit{computational limits} can be imposed (e.g. maximum computation time or maximum memory). An \textit{experiment} is the cartesian product of some set of algorithm configurations, a set of instances, a set of computing systems, and some computational limits. An element of an experiment is a \textit{job}. When the computation of a job is finished it will have a \textit{result}. Any information that is computed from a result is a \textit{result property}. 
+
+
+
 \index{Algorithm engineering}\marginlabel{Algorithm engineering:}
 When designing and implementing algorithms one is at the end of the process confronted with the problem of evaluating the implementation on the targeted problem set. As the authors of \edacc are familiar with algorithms for the satisfiability problem we will take this sort of algorithms as examples. After designing and implementing a SAT solver we would like to see how this performs on a set of instance problems (let us suppose that our solver is an implementation of a stochastic one \ie the result of the solver on the same instance will be a random variable).
 
