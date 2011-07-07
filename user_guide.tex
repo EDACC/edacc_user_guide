@@ -12,6 +12,25 @@
 \usepackage{amsthm}
 \usepackage{color}
 \usepackage{comment}
+%\usepackage[all,draft]{draftcopy}
+\usepackage{graphicx}
+\usepackage{type1cm}
+\usepackage{eso-pic}
+\usepackage{color}
+
+\makeatletter
+\AddToShipoutPicture{%
+            \setlength{\@tempdimb}{.5\paperwidth}%
+            \setlength{\@tempdimc}{.5\paperheight}%
+            \setlength{\unitlength}{1pt}%
+            \put(\strip@pt\@tempdimb,\strip@pt\@tempdimc){%
+        \makebox(0,0){\rotatebox{45}{\textcolor[gray]{0.85}%
+        {\fontsize{6cm}{6cm}\selectfont{DRAFT}}}}%
+            }%
+}
+\makeatother
+
+
 
 \definecolor{edaccblue}{rgb}{0,0.2,0.6}
 \definecolor{green}{rgb}{0,0.8,0.2}
@@ -51,6 +70,7 @@ EDACC \\User Guide \\version 0.1\\ & \includegraphics[scale=0.3]{edacclogo.jpg}
 \author{Copyright\copyright by  Adrian Balint, Daniel Diepold, Daniel Gall, Simon Gerber, Gregor Kapler, Robert Retz, Melanie Handel}
 \date{}
 
+
 \pagestyle{myfootings}
 \markboth{EDACC User Guide}%
          {EDACC User Guide}
@@ -61,6 +81,7 @@ EDACC \\User Guide \\version 0.1\\ & \includegraphics[scale=0.3]{edacclogo.jpg}
 \begin{document}
 
 \maketitle
+
 
 
 \begin{abstract}
@@ -222,11 +243,11 @@ EDACC consists of four major components:
 \input{experimentmode}
 \input{managedbmode}
 
-\newpage
-\section{Parameter search space specification [Draft]}
-\label{parameter_spec}
-\input{parameter_spec}
-\clearpage
+%\newpage
+%\section{Parameter search space specification [Draft]}
+%\label{parameter_spec}
+%\input{parameter_spec}
+%\clearpage
 
 
 
