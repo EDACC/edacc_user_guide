@@ -124,12 +124,17 @@ In case of network failures you should still be able to find useful information 
 
 \subsection{Verifiers}
 \label{sec:verifiers}
-Verifiers are programs that the client runs after a job finishes. Verifiers are getting passed the instance of the job and the solver output as arguments and are supposed to exit with a status code that conveys some information about the result of the job. For example whether the output is correct given the problem instance. This code will be written to the database as ''result code'' and ''verifier exit code''. Any output the verifier writes to standard out will
+Verifiers are programs that the client runs after a job finishes. Verifiers are getting passed the instance of the job and the solver output as arguments and are supposed to
+write a newline character followed by a (textual/ASCII) integer result code at the end of their output. The result code should convey some information about the result of
+the job, for example whether the output of the solver is correct given the problem instance.
+This code will be written to the database as ''result code'' while the verifier's exit code will be written as ''verifier exit code''. Any output the verifier writes to standard out will
 be written as ''verifier output''. The call specification for a verifier binary looks like this:
 \begin{verbatim}
 ./verifier_binary <path_to_instance> <path_to_solver_output>
 \end{verbatim}
-We provide a verifier for the SAT problem that works on CNF instances in DIMACS format and solvers that adhere to a certain output format (see the source code). \attention Note that you have to make sure
+We provide a verifier for the SAT problem that works on CNF instances in DIMACS format and solvers that adhere to a certain output format (see the source code).
+If you want to write an own verifier specific to your problem you can also use the source code as implementation example.
+\attention Note that you have to make sure
 that your possible result codes are specified in the \textit{ResultCodes} table in the database before running clients or there will be errors when the client tries to write results. By convention,
 the web frontend and GUI application consider status codes that begin with a decimal ''1'' as correct answers.
 
