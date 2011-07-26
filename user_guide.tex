@@ -52,7 +52,7 @@
 
 \newcommand{\ie}{i.\,e.,}
 \newcommand{\eg}{e.\,g..}
-\newcommand{\edacc}{\textit{EDACC} }
+\newcommand{\edacc}{\textbf{\color{edaccblue}EDACC} }
 
 
 
@@ -144,110 +144,16 @@ Die allgeinen Konzepte und Probleme werden in der Anleitung sehr gut beschrieben
 Here we will have an overview of this user guide specifying where the user can find what!
 
 \section{Introduction}
+\input{introduction}
 
-\subsection{General terms - definitions}
-To keep this user-guide consistent we would like to define a couple of terms:
-\begin{definition}{Algorithm}
-	We define an algorithm as an arbitrary computation method. \marginlabel{Algorithm}
-\end{definition}
-
-\begin{definition}{(Problem) Instance}
-	We define a (problem) instance as the instantiation of a problem.  \marginlabel{Instance}
-\end{definition}
-
-\begin{definition}{Instance property}
-	We define an instance property as an arbitrary information that can be computed from the instance.  \marginlabel{Instance Property}
-\end{definition}
-
-\begin{definition}{Solver}
-	We define a solver as the implementation of an algorithm in an arbitrary programming language. \marginlabel{Solver} A solver has an input and an output. One of the input of the solver is the instance.
-\end{definition}
-
-\begin{definition}{Solver Parameters}
-	The behavior of a solver can be controlled by some parameters that also act like an input to the solver. \marginlabel{Solver Parameters}
-\end{definition}
-
-\begin{definition}{Solver Configuration}
-	A solver together with a set of fixed values for its parameters is called a solver configuration. \marginlabel{Solver Configuration}
-\end{definition}
-
-\begin{definition}{Computing System}
-	\marginlabel{Computing System}
-\end{definition} We define a computing system as the computer, computer cluster, or grid on which a solver is executed.  
-
-
-
-
-Before describing the main components some entities that will be used through the rest of the paper are defined. A \textit{solver} is an implementation of an algorithm that works on some input and has an output. The behavior of a solver is controlled by arbitrarily many \textit{parameters}. A solver together with some fixed parameters is called a \textit{solver configuration}. The input to a solver is called an \textit{instance}. Any information that can be computed from an instance is called an \textit{instance property}. 
-%For example \textit{TSAT} is a solver implementing the tabu search algorithm, has as parameters the tabu-tenure and is solving SAT-problems. 
-A \textit{computing system} is defined as the computer, computer cluster, or grid on which a solver is tested. When running a solver on a computing system \textit{computational limits} can be imposed (e.g. maximum computation time or maximum memory). An \textit{experiment} is the cartesian product of some set of algorithm configurations, a set of instances, a set of computing systems, and some computational limits. An element of an experiment is a \textit{job}. When the computation of a job is finished it will have a \textit{result}. Any information that is computed from a result is a \textit{result property}. 
-
-
-
-\index{Algorithm engineering}\marginlabel{Algorithm engineering:}
-When designing and implementing algorithms one is at the end of the process confronted with the problem of evaluating the implementation on the targeted problem set. As the authors of \edacc are familiar with algorithms for the satisfiability problem we will take this sort of algorithms as examples. After designing and implementing a SAT solver we would like to see how this performs on a set of instance problems (let us suppose that our solver is an implementation of a stochastic one \ie the result of the solver on the same instance will be a random variable).
-
-Normally we would start our solver on each instance and record the runtime or some quality measure. This is a sequential process and could be easily performed with the help of simple shell script. But there are some questions that have to be answered before starting the evaluation process. 
-
-\begin{enumerate}
-\item How long is the solver allowed to compute on one instance? And how do we restrict that?
-\item In the case of randomized solvers, how often do we call the solver on each problem set?
-\item Do we limit the resources used by the solver (\ie maximum of memory, maximum stack size)?
-\end{enumerate}
-
-Let us now suppose we would like to test our SAT-solver on 100 instances where we allow a timeout of 200 seconds. \marginlabel{\Eexample}  Because of the stochastic nature of the solver we are going to tun it for 100 times on each instances. We are not going to limit other resources. Now we get a set of (100 instances) $\times$ (100 runs) that produces a set of 10000 jobs. Having a timeout limit of 200 seconds our computation could take up to $10000\cdot 200=2000000sec\cong24 days$ on a single CPU machine in worst case. 
-
-Now everybody has access to multi-core machines or even some clusters with multiple CPU's. So we could speed up the computation by using this sort of resources but then we get the problem of equally spreading our jobs. And more than that we have to collect the results after that and process them with some statistical tools. 
-
-Most of the researchers solve this problems by writing a collection of scripts. This solution is error-prone and time consuming because there is no very simple way to equally spread jobs across multiple machines. Collecting the results and merging them together also can also yield a not negligible amount of work. 
-One more disadvantage is that the results can be seldom reproduced without having the complete set of scripts and even then there might be some steps that are not incorporated within the scripts. 
-
-To solve this problems we have designed \edacc. The main goal of \edacc is to:
-\begin{enumerate}
-	\item manage solvers and instances and archiving them in a database with the help of a GUI
-	\item create experiment settings by configuring solvers and selecting the instances
-	\item evaluating the jobs of an experiment on arbitrary many machines
-	\item provide analysis tools for the results
-	\item provide an online tool to monitor and analyze experiments
-\end{enumerate}
-
-\subsection{What is EDACC}
-\marginlabel{\edacc Components}
-EDACC consists of four major components:
-\begin{enumerate}
-	\item Grapical user interface (GUI) 
-	\item Database (DB)
-	\item Compute client (client) 
-	\item Web frontend (WF) (optional)
-\end{enumerate}
-
-\subsection{System Requirements}
-
-\begin{enumerate}
-	\item GUI - Sun Java from version ... \attention
-	\item DB - MySQL version ... or above \attention
-	\item client - see section \ref{clientSR} \attention
-	\item Web frontend - see section \ref{wfSR} \attention
-\end{enumerate}
-
-\subsection{Getting started}
-
-\begin{enumerate}
-	\item Setting up a MySQL Database: \marginlabel{MySQL database}. As all solvers, instances and results are permanentaly saved within the database you have to have a MySQL server to use \edacc. The performance of \edacc is highly dependet from the DB-server. 
-	
-	
-\end{enumerate}
-
-
-\section{User Interface}
-\input{experimentmode}
+\section{Graphical User Interface}
 \input{managedbmode}
-
-%\newpage
-%\section{Parameter search space specification [Draft]}
-%\label{parameter_spec}
-%\input{parameter_spec}
-%\clearpage
+\input{experimentmode}
+\newpage
+\section{Parameter search space specification [Draft]}
+\label{parameter_spec}
+\input{parameter_spec}
+\clearpage
 
 
 

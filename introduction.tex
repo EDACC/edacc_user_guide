@@ -1,0 +1,71 @@
+
+\subsection{General Terms}
+To keep this user-guide consistent we would like to define a couple of terms that will be often used through this document. Even if you are familiar with these, we recommend you to take a short look at them.
+
+
+\marginlabel{Algorithm} We define an \textbf{algorithm} as an arbitrary computation method.  Examples of well known algorithms are the family of sorting algorithms like bubble-sort, quick-sort or merge-sort.
+\marginlabel{Solver} The concrete implementation of an algorithm in an arbitrary programming language is called a \textbf{solver}, which normally has an input and an output. 
+
+A solver is designed to solve a certain type of problem.\marginlabel{Instance} One concrete problem (an instantiation of it) is called a (problem) \textbf{instance} . For the sorting algorithms an example of an instance would be a file containing a sequence of number that has to be sorted.
+
+\marginlabel{Solver Parameters} To control the behavior of a solver it can have parameters which we will call \textbf{solver parameters}. These parameters can be also seen as an input of the solver which is normally passed through the command line. For example the quick-sort algorithm could have a parameter ``pivot'' that can take the values $\{left,right,random\}$. With the help of this parameter the behavior of the solver can be controlled regarding how it should choose the pivot element during sorting. 
+
+\marginlabel{Solver Configuration} A solver together with a fixed set of values for its parameters is called a \textbf{solver configuration}. Randomized quick-sort would be a solver configuration of the quick-sort solver with the parameter ``pivot'' set to $random$. 
+
+\marginlabel{Computing System} To see how a solver performs on a certain instance we need to execute that solver. For this task we need a \textbf{computing system} which in \edacc ca be a single computer, computer cluster of even a grid. 
+
+As \edacc provides a wide variety of statistical analysis tools we need a way to point out different forms of informations.  \marginlabel{Instance Property} We define a \textbf{instance property} as any kind of information that can be extracted from an instance. \marginlabel{Result Property} The output of a solver is called the \textbf{result} and any information that can be computed from the result is called \textbf{result property}. 
+
+
+\subsection{Motivation}
+
+
+\index{Algorithm engineering}\marginlabel{Algorithm engineering:}
+When designing and implementing algorithms one is at the end of the process confronted with the problem of evaluating the implementation on the targeted problem set. As the authors of \edacc are familiar with algorithms for the satisfiability problem we will take this sort of algorithms as further examples. After designing and implementing a SAT solver we would like to see how it performs on a set of instance problems (let us suppose that our solver is an implementation of a stochastic one \ie the result of the solver on the same instance will be a random variable).
+
+Normally we would start our solver on each instance and record the runtime or some quality measure. This is a sequential process and could be easily performed with the help of simple shell script. But there are some questions that have to be answered before starting the evaluation process. 
+
+\begin{enumerate}
+\item How long is the solver allowed to compute on one instance? And how do we restrict that?
+\item In the case of randomized solvers, how often do we call the solver on each problem set?
+\item Do we limit the resources used by the solver (\ie maximum of memory, maximum stack size)?
+\end{enumerate}
+
+Let us now suppose we would like to test our SAT-solver on 100 instances where we allow a timeout of 200 seconds. \marginlabel{\Eexample}  Because of the stochastic nature of the solver we are going to run it for 100 times on each instances. We are not going to limit other resources. Now we get a set of (100 instances) $\times$ (100 runs) that produces a set of 10000 jobs. Having a timeout limit of 200 seconds our computation could take up to $10000\cdot 200=2000000sec\cong24 days$ on a single CPU machine in worst case. 
+
+Now everybody has access to multi-core machines or even some clusters with multiple CPU's. So we could speed up the computation by using this sort of resources but then we get the problem of equally spreading our jobs. And more than that we have to collect the results after that and process them with some statistical tools. 
+
+Most of the researchers solve this problems by writing a collection of scripts. This solution is error-prone and time consuming because there is no very simple way to equally spread jobs across multiple machines. Collecting the results and merging them together can also yield a not negligible amount of work. 
+One more disadvantage is that the results can be seldom reproduced without having the complete set of scripts and even then there might be some steps that are not incorporated within the scripts. 
+
+To solve this problems we have designed \edacc. The main goal of \edacc are to: \marginlabel{\edacc features}
+\begin{enumerate}
+	\item manage solvers and instances and archiving them in a database with the help of a GUI
+	\item create experiment settings by configuring solvers and selecting the instances
+	\item evaluating the jobs of an experiment on arbitrary many machines
+	\item provide analysis tools for the results
+	\item provide an online tool to monitor and analyze experiments
+\end{enumerate}
+
+\subsection{EDACC Components}
+
+The four major components of \edacc are the:
+\begin{enumerate}
+	\item Grapical user interface (GUI) 
+	\item Database (DB)
+	\item Compute client (client) 
+	\item Web frontend (WF) (optional)
+\end{enumerate}
+
+\subsection{System Requirements}
+\input{systemRequirements}
+
+\subsection{Getting started}
+To use \edacc you will have to follow these steps: 
+\begin{enumerate}
+	\item set up a mysql database
+	\item download the latest \edacc GUI from sourceforge.org (eventually check for updates within \edacc)
+	\item check if the client runs on your target computing system (eventually recompile the client on the targeted computation system)
+\end{enumerate}
+	
+	
