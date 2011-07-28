@@ -1,16 +1,12 @@
-\subsection{Definitions}
-A parameter is an input variable of a program and is defined by a name, a domain, a prefix (which can also be empty) and an order number.
-Additionally there are two booleans. ''space'' that indicates whether to put a space between the prefix and the value. ''attach to previous''
-indicates whether there should be a space between the previous parameter (according to order) and this one.
-''attach to previous'' can be useful for parameters that look like ''-prefix v1[,v2,v3]''. '',v2'' and '',v3'' can be modeled as parameters that attach
-to the preceding ''-prefix'' parameter.
+This section explains the concept of parameter graphs that are used to encode
+the parameter space of solvers in EDACC. If you are only interested in specifying the parameter space
+of a solver we suggest to skim over the details and first take a look at the example \ref{paramspecexample}.
+In the context of parameter spaces a parameter is an input variable of a program and is defined by a name and a domain.
+Properties of parameters such as the command line prefix and the order in which the should appear when calling the solver executable
+aren't of interest in this context.
 
 \begin{definition}
-A solver configuration is a list of parameters and their assigned values.
-\end{definition}
-
-\begin{definition}
-A domain defines the set of possible values that can be assigned to a parameter (in a solver configuration). It can be one of the following or the union of any number of them (except for the flag domain, which can only occur on its own).
+A domain defines the set of possible values that can be assigned to a parameter (in a solver configuration). It can be one of the following or the union (which we call mixed domain) of any number of them (except for the flag domain, which can only occur on its own).
 \begin{enumerate}
 \item real: values between a lower and an upper bound
 \item integer: values between a lower and an upper bound
@@ -31,7 +27,7 @@ dependencies between parameters such as
 \end{enumerate}
 \end{definition}
 
-There are several tasks that come up in the context of EDACC: Determine if a given solver configuration is valid, i.e. in the solver's parameter space.
+There are several problems that come up in the context of EDACC: Determine if a given solver configuration is valid, i.e. in the solver's parameter space.
 Given the parameter space, construct a valid solver configuration. Given a valid solver configuration, find a ''neighbouring'' solver configuration that is also valid.
 
 \begin{definition}
@@ -62,66 +58,11 @@ A solver configuration is valid if the start node (an AND-Node) of the parameter
 \item an OR-Node is satisfied if exactly one adjacent AND-Node is satisfied and for at least one set of incoming edges with common group number the preceding AND-Nodes are all satisfied.
 \end{enumerate}
 \end{definition}
-\newpage
 
-\subsection{Algorithms on parameter graphs}
-
-Constructing a valid, random solver configuration:
-\begin{verbatim}
-Input: parameter graph; Output: (random) solver configuration
-done_and := {startnode} # set containing only the start node
-done_or := {} # empty set
-
-L := list of OR-nodes adjacent to startnode
-
-while (L has nodes with >= 1 group of edges coming from \
-       AND-nodes in done_and):
-    or_node := choose and remove such a node randomly from L
-    done_or.add(or_node)
-    and_node := choose an AND-node adjacent to or_node
-                randomly (or with user input)
-    done_and.add(and_node)
-    Assign a random (or user chosen) value from and_node.domain to
-     the and_node.parameter of the solver configuration 
-    
-    Add all OR-nodes that are adjacent to and_node, not yet in
-        L and not in done_or to L
-
-return the solver configuration
-\end{verbatim}
-
-Validating a solver configuration (TODO: issues with optional parameters):
-\begin{verbatim}
-Input: Parameter Graph, Solver configuration; Output: Boolean
-assigned_and_nodes := Set of AND-nodes with parameters that are
-                        part of the solver config
-
-Test if all required OR-node parameters are present
- i.e. of OR-nodes that have at least one incoming edge
- group from assigned AND nodes
- 
-or_nodes := Set of preceding OR-nodes of assigned_and_nodes
-for each or_node in or_nodes:
-    - Test if or_node has exactly one adjacent AND-node in
-      assigned_and_nodes
-    - Test if at least one group of edges comes from
-      assigned AND-nodes
-
-Test if all OR-nodes adjacent to start node are in or_nodes
-
-return True if all tests were passed
-\end{verbatim}
-
-Open problems:
-\begin{itemize}
-\item Discretise real valued parameters. Especially the discretisation of domains divided into several domains (several AND-Nodes) is unclear.
-\item find an algorithm to iterate over the neighbourhood of a given solver configuration (with discretised parameters)
-\item crossover and mutation operators for genetic algorithms
-\end{itemize}
-
-\newpage
+\clearpage
 
 \subsection{Example}
+\label{paramspecexample}
 \marginlabel{\Eexample}
 Consider a solver that has the following parameters:
 \begin{itemize}
@@ -145,9 +86,4 @@ This parameter space can be encoded in a parameter graph as defined earlier in t
 
 The two red edges imply the membership of the edges to the same edge group $\neq 0$. Black edges mean that the edge doesn't belong to any group.
 For simplicity, the parameter references of AND-Nodes (to the same parameter as the preceeding OR-Node) are not shown in the graph.
-\clearpage
-\subsection{Implementation etc.}
-\begin{itemize}
-\item define parameter graphs in XML / GUI 
-\item API documentation for configurators
-\end{itemize}
+
