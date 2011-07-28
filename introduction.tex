@@ -68,4 +68,40 @@ To use \edacc you will have to follow these steps:
 	\item check if the client runs on your target computing system (eventually recompile the client on the targeted computation system)
 \end{enumerate}
 	
-	
+\subsection{MySQL Installation and Setup}
+MySQL installation is simple on most Linux distributions. On Ubuntu, for example, you
+have to type \texttt{apt-get install mysql-server} and set a root account password
+when the installation procedure asks you to.
+\marginlabel{MySQL configuration} After installation there are a few settings
+that have to be adjusted in order to use MySQL with \edacc. These can be found in the configuration file
+my.cnf usually located at \texttt{/etc/mysql/my.cnf}. Adjust the following settings:
+\begin{verbatim}
+[mysqld] # look for this section
+# listen on all IPs/allow network connections :
+bind-address = 0.0.0.0
+ # maximum packet size (important for large instances):
+max_allowed_packet = 2048M
+
+# comment out the skip-networking directive,
+# if present:
+#skip-networking
+
+# performance related settings
+# innodb_buffer_pool_size is the most important parameter
+# set this to as much RAM as you can spare on the machine:
+innodb_buffer_pool_size = 1024M
+\end{verbatim}
+After saving the modifications, restart your MySQL server (Ubuntu: \texttt{service mysql restart})
+and open a MySQL client session by typing \texttt{mysql -uroot -p} which will then ask you for
+the root password you specified during MySQL installation.
+\marginlabel{Creating databases}
+In the MySQL client shell you can then create an empty database that can be used as \edacc~database
+by running the following commands:
+\begin{verbatim}
+CREATE DATABASE EDACCDB;
+GRANT ALL PRIVILEGES ON EDACCDB.* TO 'dbuser'@'%'
+  IDENTIFIED BY 'dbuserpassword' WITH GRANT OPTION;
+\end{verbatim}
+This will create an empty database called \textit{EDACCDB} and grant the MySQL user \textit{dbuser}
+with the password \textit{dbuserpassword} all necessary rights. In the \edacc~GUI, client and Web Frontend
+you can then use this account when connecting to the database.
