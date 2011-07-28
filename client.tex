@@ -2,7 +2,7 @@
 \subsection{Introduction}
 The computation is client is used to compute the jobs of experiments. Usually there have to be a lot of jobs computed to evaluate experiments
 and since they are independent from each other, this task can be parallelized across many CPU cores. The computation client can be started on arbitrarily many
-machines and will manage the available CPUs and fetch and jobs from the created experiments. It connects to the central database and downloads all required resources
+machines and will manage the available CPUs and start jobs from the available experiments. It connects to the central database and downloads all required resources
 such as instances and solver binaries and writes back the results to the database.
 
 \subsection{System requirements}
@@ -19,15 +19,15 @@ The client was mainly tested on the bwGRID\footnote{{http://www.bw-grid.de/}}, a
 nodes at several physical locations at universities of Baden-Württemberg, Germany. Even though the machine hardware is homogenous, the network topology of bwGRID is not.
 \marginlabel{Connection alternatives:}
 In cases where direct network access from the computation nodes back to the database server is not possible it is usually possible to tunnel a connection
-over the cluster's login node back to the database via SSH.
+over the cluster's login node back to the database via SSH. \todo provide example
 
 Other than that, the client has to be able to write temporary files to some location on the filesystem. This can be configured (\ref{client_command_line_arguments}) if it differs from the client binary location.
 
 Because the client will download missing solver binaries and instances and upload results it also needs a reasonably fast network connection to the database. 
 \marginlabel{Shared filesystems:}
 \index{Shared filesystems}
-Shared filesystems can considerably reduce the required bandwidth since every file is only downloaded once. As alternative you can pre-package the required files and put them into the correct folders
-before starting the client. However, if you modify experiments while the client is running it will still download missing files.
+Shared filesystems can considerably reduce the required bandwidth since every file is only downloaded once. Alternatively you can create
+a package from within the GUI that contains all solver binaries and instances of an experiment. However, if you modify experiments while the client is running it will still download missing files.
 
 \newpage
 \subsection{Usage}
@@ -78,27 +78,31 @@ Beside the configuration file there are several command line options the client 
 -h:
   Toggles whether the client should continue to run even
   though the CPU hardware of the grid queue is not homogenous.
+-s:
+  Enables simulation mode where the client will fetch and run
+  jobs but won't write any results back to the database.
 \end{verbatim}
 
 Verbosity controls the amount of log output the client generates. A value of 4 is only useful for debugging purposes, a value of 0 will make the client log important messages and all errors.
 
-If the ''l'' flag is set, log output goes to a file whose name includes the hostname and IP address of the machine the client runs on to avoid name clashes in shared filesystems typically found in computer clusters.
+If the ''l'' flag is set, log output goes to a file whose name includes the hostname and IP address of the machine the client runs on. This is done to avoid name clashes in shared filesystems typically found in computer clusters.
 Otherwise log output goes to standard output.
 
 With the ''-w'' option you can tell the client how long to wait before exiting after it didn't start any jobs. This can be useful to keep the clients running and ready to process new jobs
 while you evaluate preliminary results and add new jobs or whole experiments. The wait option is also used to determine how long attempts should be made to reconnect to the database after
 connection losses. The default value is 10 seconds.
 
-The ''-i'' option controls how long the client should wait between its main processing loop iterations. If this value is low, it will more often look for new jobs when there are unused CPUs.
+The ''-i'' option controls how long the client should wait between its main processing loop iterations. If this value is low, it will look for new jobs when there are unused CPUs more frequently.
 For maximum job throughput this value should be lower than the average job processing time but lower values will also put more strain on the database and increase the client's CPU usage. The default
 value is 100ms which should work fine in most cases. The client will also adapt to situations where there are free CPUs but no more jobs and increase the interval internally and fall back to the configured
 value once it got another job.
 
-The ''-k'' flag tells the client if it should keep temporary job output files after a job is finished of if it should delete them. The default is to delete them.
+The ''-k'' flag tells the client that it should keep temporary job output files after a job is finished. The default behaviour is to delete them.
 
 The ''-b'' base path option can be used to specify a directory the client can use to write temporary files to. The default value is ''.'', i.e.
 the working directory at runtime.
 
+\marginlabel{inhomogenous machines}
 \attention The first client to start with a particular grid queue will write the information about the machine it runs on to the grid queue entry in the database. All following clients will then
 compare their machines to the information in the grid queue and exit, unless the number of cores and the CPU model name match. With the ''-h'' option you
 can override this behaviour.
