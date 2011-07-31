@@ -1,6 +1,25 @@
 \begin{enumerate}
-	\item GUI - Sun Java from version ... \attention
-	\item DB - MySQL version ... or above \attention
-	\item client - see section \ref{clientSR} \attention
-	\item Web frontend - see section \ref{wfSR} \attention
+	\item \attention GUI - Sun Java 1.6, optional: R (see Experiment Mode - README.txt for more details)
+	\item \attention {Database - MySQL version 5.1 or above, tested with version 5.1.41 on Ubuntu.
+	    The machine the database runs on is the most important factor of the
+	    performance of \edacc. The following components will have the greatest
+	    impact on database performance:
+	    \begin{itemize}
+	        \item {The more RAM MySQL can use, the less it has to access slow hard
+	            disks on read-transactions. It also enables MySQL to keep indexes and whole tables in memory.
+	            This will greatly affect the ability to
+	            work on multiple experiments at the same time.}
+	        \item {Hard disk performance is not as important as RAM but all data has
+	            to be written to the disk eventually which is when fast access time
+	            and write throughput become important.}
+	        \item {A fast multi-core CPU will enable MySQL to handle more requests concurrently but is
+	            not as important as RAM.}
+	    \end{itemize}
+	    Network latency and bandwidth should also be considered when the GUI and clients
+	    are run on remote machines. The clients will write the output of solvers
+	    and metadata back to the database so the required bandwidth depends
+	    on the size of the generated output and metadata.
+	}
+	\item Client - see section \ref{clientSR} \attention
+	\item Web Frontend - see section \ref{wfSR} \attention
 \end{enumerate}

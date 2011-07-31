@@ -98,10 +98,10 @@ the root password you specified during MySQL installation.
 In the MySQL client shell you can then create an empty database that can be used as \edacc~database
 by running the following commands:
 \begin{verbatim}
-CREATE DATABASE EDACCDB;
-GRANT ALL PRIVILEGES ON EDACCDB.* TO 'dbuser'@'%'
+CREATE DATABASE edacc;
+GRANT ALL PRIVILEGES ON edacc.* TO 'edaccuser'@'%'
   IDENTIFIED BY 'dbuserpassword' WITH GRANT OPTION;
 \end{verbatim}
-This will create an empty database called \textit{EDACCDB} and grant the MySQL user \textit{dbuser}
+This will create an empty database called \textit{edacc} and grant the MySQL user \textit{edaccuser}
 with the password \textit{dbuserpassword} all necessary rights. In the \edacc~GUI, client and Web Frontend
 you can then use this account when connecting to the database.
