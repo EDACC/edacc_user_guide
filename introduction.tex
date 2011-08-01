@@ -86,6 +86,11 @@ max_allowed_packet = 2048M
 # if present:
 #skip-networking
 
+# increase session timeout
+# and maximum number of simultaneous connections
+wait_timeout = 259200
+max_connections = 1000
+
 # performance related settings
 # innodb_buffer_pool_size is the most important parameter
 # set this to as much RAM as you can spare on the machine:
