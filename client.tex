@@ -19,7 +19,13 @@ The client was mainly tested on the bwGRID\footnote{{http://www.bw-grid.de/}}, a
 nodes at several physical locations at universities of Baden-Württemberg, Germany. Even though the machine hardware is homogenous, the network topology of bwGRID is not.
 \marginlabel{Connection alternatives:}
 In cases where direct network access from the computation nodes back to the database server is not possible it is usually possible to tunnel a connection
-over the cluster's login node back to the database via SSH. \todo provide example
+over the cluster's login node back to the database via SSH. For example running
+\marginlabel{\Eexample}\begin{verbatim}
+ssh -f -N -L 0.0.0.0:1234:databasehost:3306 user@databasehost
+\end{verbatim}
+on the login node sets up a tunnel for connections at port 1234 and forwards them to your database machine at port 3306, where MySQL listens.
+The options \texttt{-f} and \texttt{-N} will let the tunnel continue to run in the background, even after logging out from the login node.
+To terminate the tunnel, simply run e.g. \texttt{killall ssh} on the login node.
 
 Other than that, the client has to be able to write temporary files to some location on the filesystem. This can be configured (\ref{client_command_line_arguments}) if it differs from the client binary location.
 
