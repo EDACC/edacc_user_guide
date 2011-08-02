@@ -1,14 +1,14 @@
 % !TeX root = managedbmode.tex
 \subsubsection{Solvers}
 
-\marginlabel{Solvers} A solver is a program which implements an algorithm for solving a problem. In EDACC a solver is represented by the following information:
+\ml{Solver} As mentioned in section \ref{generalterms} a solver is a program which implements an algorithm. In \edacc we store the following information about a solver:
 \begin{enumerate}
- \item[Name] A human-readable name of the solver.
- \item[Version] The version number of the solver. The combination of name and version must be unique.
- \item[Description] A short description of the solver.
- \item[Authors] The list of the authors of a solver.
- \item[Code] The sourcecode of the solver.
- \item[Several Binaries] A solver can consist of different binaries, which have the same source code but differ in the compile options (eg. the architecture) or the chosen compiler version. There must be at least one solver binary.
+ \item \ml{Solver name} A human-readable name of the solver.
+ \item\ml{Solver version} The version number of the solver. The combination of name and version must be unique.
+ \item \ml{Solver description} A short description of the solver.
+ \item \ml{Solver authors} The list of the authors of a solver.
+ \item \ml{Solver code} The sourcecode of the solver.
+ \item \ml{Solver binaries} A solver can consist of different binaries, which have the same source code but differ in the compile options (eg. the architecture) or the chosen compiler version. There must be at least one solver binary.
 \end{enumerate}
 
 \marginlabel{Parameters} Every solver has a list of several parameters which control its behaviour. To build a valid parameter list string, EDACC needs the following information:

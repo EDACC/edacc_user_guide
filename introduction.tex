@@ -1,27 +1,29 @@
 
 \subsection{General Terms}
+\label{generalterms}
 To keep this user-guide consistent we would like to define a couple of terms that will be often used through this document. Even if you are familiar with these, we recommend you to take a short look at them.
 
 
-\marginlabel{Algorithm} We define an \textbf{algorithm} as an arbitrary computation method.  Examples of well known algorithms are the family of sorting algorithms like bubble-sort, quick-sort or merge-sort.
+\marginlabel{Algorithm} We define an \textbf{algorithm} as an arbitrary computation method.\marginlabel{\Eexample}  Examples of well known algorithms are the family of sorting algorithms like bubble-sort, quick-sort or merge-sort.
+
 \marginlabel{Solver} The concrete implementation of an algorithm in an arbitrary programming language is called a \textbf{solver}, which normally has an input and an output. 
 
-A solver is designed to solve a certain type of problem.\marginlabel{Instance} One concrete problem (an instantiation of it) is called a (problem) \textbf{instance} . For the sorting algorithms an example of an instance would be a file containing a sequence of number that has to be sorted.
+A solver is designed to solve a certain type of problem.\marginlabel{Instance}  One concrete problem (an instantiation of it) is called a (problem) \textbf{instance} . \marginlabel{\Eexample}For the sorting algorithms an example of an instance would be a file containing a sequence of number that has to be sorted.
 
-\marginlabel{Solver Parameters} To control the behavior of a solver it can have parameters which we will call \textbf{solver parameters}. These parameters can be also seen as an input of the solver which is normally passed through the command line. For example the quick-sort algorithm could have a parameter ``pivot'' that can take the values $\{left,right,random\}$. With the help of this parameter the behavior of the solver can be controlled regarding how it should choose the pivot element during sorting. 
+\marginlabel{Solver Parameters} To control the behavior of a solver it can have parameters which we will call \textbf{solver parameters}. These parameters can  also be seen as an input of the solver which is normally passed through the command line. For example the quick-sort algorithm could have a parameter ``pivot'' that can take the values $\{left,right,random\}$. With the help of this parameter the behavior of the solver can be controlled regarding how it should choose the pivot element during sorting. 
 
 \marginlabel{Solver Configuration} A solver together with a fixed set of values for its parameters is called a \textbf{solver configuration}. Randomized quick-sort would be a solver configuration of the quick-sort solver with the parameter ``pivot'' set to $random$. 
 
 \marginlabel{Computing System} To see how a solver performs on a certain instance we need to execute that solver. For this task we need a \textbf{computing system} which in \edacc ca be a single computer, computer cluster of even a grid. 
 
-As \edacc provides a wide variety of statistical analysis tools we need a way to point out different forms of informations.  \marginlabel{Instance Property} We define a \textbf{instance property} as any kind of information that can be extracted from an instance. \marginlabel{Result Property} The output of a solver is called the \textbf{result} and any information that can be computed from the result is called \textbf{result property}. 
+As \edacc provides a wide variety of statistical analysis tools we need a way to point out different forms of informations.  \marginlabel{Instance Property} We define an \textbf{instance property} as any kind of information that can be extracted from an instance. \marginlabel{Result Property} The output of a solver is called the \textbf{result} and any information that can be computed from the result is called \textbf{result property}. 
 
 
 \subsection{Motivation}
 
 
 \index{Algorithm engineering}\marginlabel{Algorithm engineering:}
-When designing and implementing algorithms one is at the end of the process confronted with the problem of evaluating the implementation on the targeted problem set. As the authors of \edacc are familiar with algorithms for the satisfiability problem we will take this sort of algorithms as further examples. After designing and implementing a SAT solver we would like to see how it performs on a set of instance problems (let us suppose that our solver is an implementation of a stochastic one \ie the result of the solver on the same instance will be a random variable).
+When designing and implementing algorithms one is at the end of the process confronted with the problem of evaluating the implementation on the targeted problem set. As the authors of \edacc are familiar with algorithms for the satisfiability problem (SAT) we will take this sort of algorithms as further examples. After designing and implementing a SAT solver we would like to see how it performs on a set of instances (let us suppose that our solver is an implementation of a stochastic one \ie the result of the solver on the same instance will be a random variable).
 
 Normally we would start our solver on each instance and record the runtime or some quality measure. This is a sequential process and could be easily performed with the help of simple shell script. But there are some questions that have to be answered before starting the evaluation process. 
 
@@ -63,12 +65,12 @@ The four major components of \edacc are the:
 \subsection{Getting started}
 To use \edacc you will have to follow these steps: 
 \begin{enumerate}
-	\item set up a mysql database
-	\item download the latest \edacc GUI from sourceforge.org (eventually check for updates within \edacc)
-	\item check if the client runs on your target computing system (eventually recompile the client on the targeted computation system)
+	\item Set up a mysql database (see \ref{mysqlsetup}. 
+	\item Download the latest \edacc GUI from sourceforge.org (eventually check for updates within \edacc).
 \end{enumerate}
 	
-\subsection{MySQL Installation and Setup}
+\subsubsection{MySQL Installation and Setup}
+\label{mysqlsetup}
 MySQL installation is simple on most Linux distributions. On Ubuntu, for example, you
 have to type \texttt{apt-get install mysql-server} and set a root account password
 when the installation procedure asks you to.
@@ -110,3 +112,9 @@ GRANT ALL PRIVILEGES ON edacc.* TO 'edaccuser'@'%'
 This will create an empty database called \textit{edacc} and grant the MySQL user \textit{edaccuser}
 with the password \textit{dbuserpassword} all necessary rights. In the \edacc~GUI, client and Web Frontend
 you can then use this account when connecting to the database.
+
+\subsubsection{Starting the GUI}
+If you have succeeded to set up a database now you can start the GUI of \edacc by typing:
+\begin{verbatim}
+java -jar EDACC.jar
+\end{verbatim} 
