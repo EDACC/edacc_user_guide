@@ -1,6 +1,6 @@
 % !TeX root = user_guide.tex
 \subsection{Experiment Mode}
-\subsubsection{Experiments}
+\subsubsection{Experiments}\label{sec:experiments}
 \marginlabel{Experiment}\index{Experiment}\index{create/remove/edit experiments}
 An experiment consists of solver configurations, instances and the number of runs for each solver configuration and instance. In the experiment tab the user can create/remove/edit experiments.
 
@@ -9,6 +9,16 @@ By using the create-button in the first tab of the experiment mode an experiment
 \begin{enumerate}
 \item Name: the name for the new experiment
 \item Description: a description for the experiment. Provide some useful information about the experiment to quickly identify experiments in the experiments table.
+\begin{item}
+Default Cost: this will be the default cost for this experiment. This will affect some default behaviour in the GUI and the WF, e.g. the appropriate column in the job browser will be visible by default and the others will not be visible. The user can choose between three types of costs:
+\begin{enumerate}
+\item resultTime: the CPU time needed for a run will be used as cost.
+\item wallTime: the real time needed for a run will be used as cost.
+\item cost: if a verifier is used which outputs cost, then this will be used as cost.
+\end{enumerate}
+\end{item}
+\item Limits: the user can specify if the outputs should be limited. Outputs that can be limited are solver output, watcher output and verifier output. This might save disk space on the DB server. It is possible to preserve the first and/or the last lines or bytes.
+\item Configuration experiment: if set, this will be a configuration experiment and the Configuration Scenario tab will be enabled for this experiment, see section \ref{sec:configuration_scenario} for more information.
 \end{enumerate}
 After pressing the create-button the newly created experiment will be loaded automatically.
 
@@ -25,6 +35,7 @@ To discard an experiment use the appropriate button. This button is only availab
 To load an experiment use the appropriate button or double click the experiment you want to load in the experiment table.
 
 \marginlabel{Import}\label{sec:import_data_from_experiments}
+% todo: überarbeiten.
 It is possible to import data from other experiments. To import data from other experiments the following steps have to be applied:
 \begin{enumerate}
 \item Load the experiment you want to import data to
@@ -36,14 +47,28 @@ It is possible to import data from other experiments. To import data from other 
 
 \attention Note that this action might generate new jobs. This \textit{might} happen if you import solver configurations and instances with their jobs to an experiment where some of the solver configurations and instances actually exist and they are in the \textit{same seed group}.
 \end{enumerate}
+\marginlabel{Filter}
+% todo: ...
 \subsubsection{Client Browser}
-The client browser represents all clients currently connected to the database. Red rows denote dead clients. \marginlabel{Dead clients}A client is considered as dead if the client didn't communicate with the database for a period of time.
+The client browser represents all clients currently connected to the database. Red rows denote dead clients. \marginlabel{Dead clients}A client is considered to be dead if the client didn't communicate with the database for a period of time.
 
 The client browser also deals as the only way to directly communicate with clients. 
 
 \marginlabel{Kill clients}After selecting the clients you can open the context menu with the right mouse button and select \textit{Kill Clients Hard} or \textit{Kill Clients Soft}. Hard means that the clients will terminate all currently computing jobs and sign off. Soft means that the clients won't start new jobs and will wait for the currently computing jobs to finish.
 
 \marginlabel{Client details}To view the jobs which a client has computed in his lifetime you can double click a client entry in the client table. This will show a dialog with a table containing all jobs the client calculated and is currently calculating. You can also send messages to the clients in this dialog.
+
+\subsubsection{Configuration Scenario (Optional)}\index{Configuration Experiment}\index{Configuration Scenario}\label{sec:configuration_scenario}
+Configuration Scenarios are used to define a solver with its parameters to be configured with a configurator. This tab is only enabled for configuration experiments, see section~\ref{sec:experiments}. To define a configuration scenario the DB must contain at least one solver with a \marginlabel{Parameter Graph}parameter graph specified (see section~\ref{sec:parameter_graph}). There are two ways to specify a configuration scenario. Either the user imports the configuration scenario from another configuration scenario in the DB by using the \marginlabel{Import Scenario}\textbf{Import Scenario} button or the user specifies the configuration scenario manually. The following steps have to be applied to specify a configuration scenario manually:
+\begin{enumerate}
+\item Select the solver to be used for this configuration scenario in the \textbf{Solver} combo box. This combo box will only contain solvers which have parameter graphs specified. If it contains no solvers then you might want to head to the DB mode and specify a parameter graph for one or more solvers.
+\item Select the solver binary for the selected solver that will be used to execute the solver on the grid in the \textbf{Solver Binary} combo box.
+\item Select the parameters that should be used for the configurator. First the user has to select the parameters that should be used for the solver configurations created by the configurator. Then the user must specify which of these parameters should be configured and which have fixed values. If a parameter should have a fixed value and is not a boolean parameter then the value should also be specified by the user.
+\end{enumerate}
+After the steps above the configuration scenario can be saved. It is now possible to generate some random solver configurations to test the configuration scenario. To do this the user has to use the \index{Generate Solver Configurations}\marginlabel{Generate Solver Configurations}\textbf{Generate Solver Configurations} button. An input dialog will pop up and the user can choose the number of solver configurations that should be created. After applying the dialog the solver configurations will be created and saved to the DB. The user can see the result in the \textbf{Solvers} tab.
+
+The last task which can be done in this tab is generating an \index{Instance, Seed-Course}\marginlabel{Instance, Seed-Course}Instance, Seed-Course for the configuration experiment. After selecting the instances for the solver to be trained on in the \textbf{Instances} tab (see section~\ref{sec:instances}) the user can generate an Instance, Seed-Course by using the appropriate button. This will open a dialog with a table containing the course. The user can move/sort the instances to change that course. By selecting the columns with some instance properties by using the \textbf{Columns} button the user has the ability to sort the instances after an instance property.
+
 \subsubsection{Solvers}
 \index{Solver configuration}Creating solver configurations is done in the solvers tab. This tab contains two tables on the right side and a panel with all solver configurations currently associated with this experiment.
 \marginlabel{Choosing solvers}To create solver configurations you have to choose solvers for which you want create solver configurations. This can be done in the first table, the solvers table. By selecting some solvers and finally pressing the \textit{choose}-button, solver configuration prototypes will be created for the solvers. You can see the newly created solver configurations in the panel in the left side. This panel is organized as follows. For each solver exists one layer. Each layer contains all solver configuration for the associated solver. A solver configuration is titled with a name. This name can be changed and is used in the other areas of the GUI to identify a solver configuration. So it might be good practice to choose different names for the solver configurations in an experiment.
@@ -57,7 +82,7 @@ The client browser also deals as the only way to directly communicate with clien
 \attention All modifications to solver configurations are not directly saved in the database. You can use the \textit{Undo}-button the undo all changes and load the last save state. By pressing the save button all modified and new solver configurations will be saved to and deleted solver configurations will be removed from the database.
 
 \attention Modifying and saving solver configurations which have calculated runs might be not a good idea. Therefore the GUI supplies a possibility to reset the affected jobs. This might not be needed if the changed parameters have no effects to the results.
-\subsubsection{Instances}
+\subsubsection{Instances}\label{sec:instances}
 
 \subsubsection{Generate Jobs}
 
