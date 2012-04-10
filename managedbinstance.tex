@@ -17,9 +17,11 @@
 \end{enumerate}
 
 To continue the process, the user has to use the button Ok and select the directory of the instances or their explicit files. This depends on the decisions made in the previous dialogue.
+
+fehlerbehandlung, wann tritt diese auf?
  
 
-\marginlabel{Remove Instance} Use the button Remove under the instance table, to remove instances from the database.
+\marginlabel{Remove Instance} Use the button Remove under the instance table, to remove instances from the selected instance class. If the last occurence of the instance is deleted, the instance object is deleted from the database.
 
 \marginlabel{Generate Instance} ?
 
@@ -33,4 +35,20 @@ To continue the process, the user has to use the button Ok and select the direct
 
 \marginlabel{Add Instance to Instance Class} The user has to select a group of instances, use the button Add to Class and select the instance class to which the instances have to be added to in the appeared dialogue.
 
-\marginlabel{Remove Instance from Instance Class} To remove a group of instances from a instance class, the user has to select these instances and press the button Remove from Class.
+\marginlabel{Show all classes which contain the instance} All occurences in instance classes of an selected instance are displayed by pressing the button Show Classes. If more than one instance is selected the intersection of all classes found in the database are shown.
+
+\marginlabel{Create instance class}\label{createInstanceClass} By pressing the button New under the instance class Table, a new dialogue is displayed. The user is able to define a new class by defining the three following input fields.
+\begin{enumerate}
+	\item In the field Name the name of the new instance class has to be declared.
+	\item By filling out the optional field Description, the user specifies the instance class to create.
+	\item To add the new class as a child to a existing class, the user can chose the these by using the button Select. If no Parent is selected, the class is created as a root class. The button Remove, deletes the chosen parent class.
+\end{enumerate}
+
+The button Create finally creates and adds the instance class to the database. By using the Cancel button, the dialogue is closed without any changes.
+
+\marginlabel{Edit instance class} To change the name, description or parent class of a instance class, the user has to select a single class and use the button Edit. The button Edit is located under the instance class table. The displayed dialogue is like the one descripted in Create instance class \ref{createInstanceClass}, filled with the values of the selected class and a Edit button instead of the Create button.
+
+\marginlabel{Remove instance class} Using the button Remove, located under the instance class table, deletes the selected instance classes with all of their children and related instances. A instance, which last occurence is deleted with the class, finally removed from the database.
+
+\marginlabel{Export instance class} The user only has to select the instance class and click the button Export, under the instance class table, to export the selected class with all his children and related instances. After using the button, the user only has to chose the export directory. Every single class is exported as a folder, containing the child classes and instances.
+
