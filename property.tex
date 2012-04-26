@@ -1,0 +1,63 @@
+\subsection{Property}
+The management of result and instance properties is located at the menu bar, under the menu Property. There are two menu items called Import from CSV and Manage Properties.
+
+\subsubsection{Import from CSV}
+After choose the Import from CSV menu item, a file chooser will open and the \textbf{user} has to select the simple CSV file for the import. The next displayed dialogue is seperated into two tables:
+\begin{enumerate}
+	\item CSV Property: The names of property found in the CSV file. The names are identified from the first line of the choosen file.
+	\item \textbf{EDACC} Property: List of the properties avaible in \textbf{EDACC}. The user has to link the CSV properties with avaible system properties, by using the checkboxes. 
+\end{enumerate}
+
+\marginlabel{Import CSV data}
+After linking the CSV and \textbf{EDACC} properties, the \textbf{user} can import the data from the CSV file to \textbf{EDACC} by using the button Import. If existing data in the system should be replaced by the new imported data, the \textbf{user} has to chose Overwrite property data.
+\attention The data of a CSV property with no link to a \textbf{EDACC} property will not be added to the System. The \textbf{user} can also drop a CSV property by selection one and useing the button Drop.
+
+\marginlabel{Manage \textbf{EDACC} properties}
+By pressing the button Manage, located under the System property table, the Manage Properties dialogue, descriped in \ref{}, are displayed.
+
+\subsubsection{Manage Properties} 
+This dialogue provides  the creation, deletion and modification of properties to the \textbf{user}. The dialouge is structured into two parts:
+\begin{enumerate}
+	\item Property overview: Table which displays all result and instance properties already avaible in \textbf{EDACC}.
+	\item Property details: Some input fields, showing detailed informations of the selected property to the \textbf{user} like the name or description. These input fields are used at the creation of new properties, too. 
+\end{enumerate}
+
+\marginlabel{Create property}
+To create a new property, the \textbf{user} has to use the button New, located at the buttom of the dialogue. The property to create is defined by the following values, which have to be chosen by the \textbf{user}:
+\begin{enumerate}
+	\item Property type: Two different types of properties are defined in \textbf{EDACC}, instance and result properties. 
+	\item Name: The name of the new property, like "Number of variables" for a instance property.
+	\item Description: A optional field, to specify the property and it's function.
+	\item Property source: The choice of sources depends on the chosen type of the Property. If instance property is selected, the \textbf{user} can choose between Instance (The instance file), InstanceName(Name of the Instance), ExperimentResult (The results from a calculated Experiment) and CSVImport (Only imported values, no calculation possible). Otherwise between the four different outputs of a experiment, the Launcher-, Solver-, Verifier and WatcherOutput. The property source defines the data resource from which the property values are calculated.
+	\item Calculation types: There are two possibilities to calculated a property, using a external script, program or via a regular expression. To use regular expressions, select Regular Expression and define one or more regular expressions into the textfield, leftside of the selection button. Are more than one regular expressions are used, the \textbf{user} has to seperate them with a new line. Else if the \textbf{user} want to use a external script, he has to select Computation Method, chose the computation methode and optional define some parameters for the execution of the external script. -----------Verweis auf Add computation method
+	\item Value type: Chose the data type of the caluclated property values to afford their processing and displaying in the GUI. \textbf{EDACC} provides four default value types, String, Float, Integer and Long. The \textbf{user} can expand the list of value types by adding new value types, explained at.   -----------Define property value type
+	\item Multiple occurrences: This option specifies if the property can occurre single or multiple in a single property source object. 
+\end{enumerate} 
+\attention The new property is not saved until the button Save, located under the input fields, is used. If the \textbf{user} selects a property or use the button New, buttomside of the dialogue, the inputs in the fields are deleted. 
+
+\marginlabel{Remove property}
+The \textbf{user} can remove a existing property from EDACC, by the selection of the property and use of the button remove.
+
+\marginlabel{Import property}
+Properties exported with \textbf{EDACC} can be imported via the Import button, located at the buttom of the dialogue. The \textbf{user} only has to chose the file to import with the displayed file chooser. This feature, combined with the export of properties,  allows to share \textbf{EDACC} properties.
+
+\marginlabel{Export property}
+Allows the \textbf{user} to export properties to other \textbf{EDACC} systems.
+
+\marginlabel{Define property value type}
+To create new value types of the property values, the button new, located in the property details section, leftside the label Value type have to be used. The shown dialogue enables two functions to the \textbf{user}:
+\begin{enumerate}
+	\item Add: By selecting the jar archive, contaning implementations of the java interface class PropertyValueType, new value types can be added to the \textbf{EDACC} system. The \textbf{user} only has to select the corresponding java classes of the value types, from the list, displaying all found classes of the jar archive.
+	\item Remove: Only \textbf{user} defined value types can be deleted by using the Remove Button. Value types declared default, cannot be removed.
+\end{enumerate}
+
+\marginlabel{Add computation Method}
+After using the button New leftside the label Computation method, a dialogue is shown divided into a table, containing all avaible computation methods, and a form for a detailed view of the computation methods. To add a computation method the user has to use the button New, under the overview table and fill in the three inputs field:
+\begin{enumerate}
+	\item Name: Define the name of the new computation method
+	\item Descritpion: It's a optional field, to comment and specifiy the computation method.
+	\item Binary: The \textbf{user} has to chose the binary of the computation method via a file chooser.
+\end{enumerate}
+\attention The inputs of the new computation method are not saved, until the button Save is pressed. 
+
+\attention The external script or program of the computation method get the data to process via standard input stream and has to commit the result via standard output stream. It have only to be able to calculate from one source object, like a instance file, \textbf{EDACC} will call the computation method with only a single object, terminate it and restart it with the next source object.

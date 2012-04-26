@@ -4,35 +4,36 @@
 
 \marginlabel{Instance Class} Instance classes enables the user to group and organize instances into different categories. It's possible that an instance is assigned to several instance classes. An instance classes can include other instance classes and are represented as an tree.
 
-\marginlabel{Add Instance} To add one or more instances, use the button Add. In the following dialogue are four possible choices. 
+\marginlabel{Add Instance} To add one or more instances via the GUI, the button Add has to used. The following dialogue allows the \textbf{user} to set the add process.
 \begin{enumerate}
-	\item If automatic class generation is selected, the added instances are added to instance classes which
-	are generated from the dependent on the directory of the instances to add. .
+	\item If automatic class generation is selected, the new instances are added to  automatic generated instance classes. The name and structure of these classes depent on the directory of the added instances.
 	
-	\item If the automatic class generation isn't selected, the user have to choose an instance class from the 		instance class table of the dialogue. Else if automatic class generation is selected, the choice of an 			instance class is optional.
+	\item If the automatic class generation isn't selected, the user has to choose on of the the listed instance classes. Else if automatic class generation is selected, the choice of a class is optional.
 	
-	\item To save the instances as compressed files in the database, select Compress.
+	\item To save the instances as compressed files into the database, select Compress.
 	
-	\item In the field File Extension, the user has to define the file extension of the instance files to add.
+	\item In the field File Extension, the \textbf{user} has to define the file extension of the files to add as instances.
 \end{enumerate}
 
-To continue the process, the user has to use the button Ok and select the directory of the instances or their explicit files. This depends on the decisions made in the previous dialogue.
+To start the process, the user has to use the button Ok and select the directory  or the explicit files of the instances to add. This depends on the decisions made in the previous dialogue.
 
-fehlerbehandlung, wann tritt diese auf?
+\attention If a duplicate name or md5 sum of a instance to add already exists in the \textbf{EDACC} data, a error handling dialogue is displayed. This dialogue is specified in \ref{}.
  
+
+\marginlabel{Add duplicate Instance}
 
 \marginlabel{Remove Instance} Use the button Remove under the instance table, to remove instances from the selected instance class. If the last occurence of the instance is deleted, the instance object is deleted from the database.
 
 \marginlabel{Generate Instance} ?
 
-\marginlabel{Export Instance} The export function of instances from EDACC is provided by the Button Export, located on the left side under the instance table. The user has to choose the directory, in which the instances are exported.
+\marginlabel{Export Instance} The export function of instances from EDACC is provided by the button Export, located on the left side under the instance table. The user has to choose the directory, into which the instances are exported.
 
-\marginlabel{Compute Property} To compute a property of a group of instances, the user has to select the instances in the table and use the button Compute Property. After pressing the button a new dialogue is shown, with the possible properties to compute. To start the computation process, a property has to be chosen and the button Compute to be pressed.
+\marginlabel{Compute Property} To compute a property of a group of instances, the \textbf{user} has to select the instances and use the button Compute Property. After pressing the button a new dialogue is shown, with the possible properties to compute. To start the computation process,  the \textbf{user} has to chose a property and press the button Compute.
 
-\marginlabel{Filter Instances} The user can call the filter function dialogue of the instance table by using the button Filter. ....
+\marginlabel{Filter instances} The user can call the filter function dialogue of the instance table by using the button Filter. The function and controll of the filter is the same as the instance filter in the experiment mode \ref{}.
 
-\marginlabel{Select Columns of Instances} A selection of columns of the instance table can be called by pressing the button Select Columns. The appearing dialogue shows two kinds of columns which can be selected by the user, the Basic Columns and the Instance Property Columns. The variety of property columns depends on the number of defined instance properties.  
-
+\marginlabel{Select columns of instances} A selection of columns of the instance table can be called by using the button Select Columns. The appearing dialogue shows two kind of columns which are selectable, named the Basic Columns and the Instance Property Columns. The variety of property columns depends on the number of defined instance properties.  
+-------------------------------------------
 \marginlabel{Add Instance to Instance Class} The user has to select a group of instances, use the button Add to Class and select the instance class to which the instances have to be added to in the appeared dialogue.
 
 \marginlabel{Show all classes which contain the instance} All occurences in instance classes of an selected instance are displayed by pressing the button Show Classes. If more than one instance is selected the intersection of all classes found in the database are shown.
