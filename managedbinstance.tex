@@ -2,52 +2,52 @@
 \subsubsection{Instances}
 \marginlabel{Instance} An instance is a practical instantiation of a problem. The instances tab provides functions to add, remove, generate and organize instances.
 
-\marginlabel{Instance class} Instance classes enable the \textbf{user} to group and organize instances into different categories. It is possible that an instance is assigned to several instance classes. An instance class can include other instance classes and are represented as a tree.
-Save To DB
-\marginlabel{Add instance} To add one or more instances via the GUI, the ``Add'' button  has to be used. The following dialogue allows the \textbf{user} to set the add process.
+\marginlabel{Instance class} Instance classes enable the \textbf{user} to group and organize instances into different categories. It is possible that an instance is assigned to several instance classes. An instance class can include other instance classes and it is represented as a tree.
+
+\marginlabel{Add instance} To add one or more instances via the GUI, the ``Add'' button  has to be used. The following dialog allows the \textbf{user} to set the add process.
 \begin{enumerate}
-	\item If the user selects ``automatic class generation'', new instances are added to automatic generated instance classes. The name and structure of these classes depend on the directory of the added instances.
+	\item If the user selects ``automatic class generation'' new instances are added to automatic generated instance classes. The name and structure of these classes depend on the directory of the added instances.
 	
-	\item If ``automatic class generation'' is not selected, the \textbf{user} has to choose one of the listed instance classes. Else if automatic class generation is selected, the choice of a class is optional.
+	\item If ``automatic class generation'' is not selected the \textbf{user} has to choose one of the listed instance classes. Otherwise if automatic class generation is selected the choice of a class is optional.
 	
 	\item Select ``Compress'' to save the instances as compressed files into the database.
 	
-	\item In the field ``File Extension'', the \textbf{user} has to define the extension of the instance files.
+	\item In the field ``File Extension'' the \textbf{user} has to define the extension of the instance files.
 \end{enumerate}
 
-To start the process, the user has to use the button ``Ok'' and select the directory  or the explicit files of the instances to add. This depends on the decisions made in the previous dialogue.
+To start the process the \textbf{user} has to use the button ``Ok'' and select the directory  or the explicit files of the instances to add. This depends on the decisions made in the previous dialog.
 
-\attention If a duplicate name or md5 sum of an instance to add already exists in the \edacc data, an error handling dialogue is displayed. 
+\attention If a duplicate name or md5 sum of an instance to add already exists in the \edacc data, an error handling dialog is displayed. 
  
-\marginlabel{Remove instance} Use the button ``Remove'' below the instance table, to remove instances from the selected instance class. If the last occurence of the instance is deleted, the instance object is deleted from the database.
+\marginlabel{Remove instance} Use the button ``Remove'' below the instance table, to remove instances from the selected instance class. If the last occurence of the instance is deleted the instance object is deleted from the database.
 
 \marginlabel{Generate instance} ?
 
-\marginlabel{Export instance} The export function of instances from EDACC is provided by the button ``Export''. It is located on the left side below the instance table. The user has to choose the directory, into which the instances are exported.
+\marginlabel{Export instance} The export function of instances from EDACC is provided by the button ``Export''. It is located on the left side below the instance table. The user has to choose the director, into which the instances are exported.
 
-\marginlabel{Compute property} To compute a property of a group of instances, the \textbf{user} has to select these instances and use the button ``Compute Property''. After that a new dialogue is shown, with the avaible properties to compute. To start the computation process,  the \textbf{user} has to choose a property and press the button ``Compute''.
+\marginlabel{Compute property} To compute a property of a group of instances the \textbf{user} has to select these instances and use the button ``Compute Property''. After that a new dialog is shown with the available properties to compute. To start the computation process  the \textbf{user} has to choose a property and press the button ``Compute''.
 
-\marginlabel{Filter instances} By using the button ``Filter'', the user can call the filter function dialogue of the instance table . The function and controll of the filter is the same as the instance filter in the experiment mode.
+\marginlabel{Filter instances} By using the button ``Filter'' the \textbf{user} can call the filter function dialog of the instance table . The function and control of the filter is the same as the instance filter in the experiment mode.
 
-\marginlabel{Select columns of instances} A selection of columns within the instance table can be called by using the button ``Select Columns''. The appearing dialogue shows two kinds of selectable columns, named the ``Basic Columns'' and the`` Instance Property Columns''. The variety of property columns depends on the number of defined instance properties.  
+\marginlabel{Select columns of instances} A selection of columns within the instance table can be called by using the button ``Select Columns''. The appearing dialog shows two kinds of selectable columns named the ``Basic Columns'' and the ``Instance Property Columns''. The variety of property columns depends on the number of defined instance properties.  
 
-\marginlabel{Add instance to instance class} The \textbf{user} has to select a group of instances, before using the button ``Add to Class''. In the appeared dialogue only the instance class, to which the instances should be added, has to be choosen.
+\marginlabel{Add instance to instance class} The \textbf{user} has to select a group of instances, before using the button ``Add to Class''. In the shown dialog only the instance class, to which the instances should be added, has to be choosen.
 
 \marginlabel{Show all classes which contain the instance} All instance classes related to a selected instance are displayed by pressing the button ``Show Classes''. If more than one instance is selected, the intersection of all located classes is shown.
 
-\marginlabel{Create instance class}\label{createInstanceClass} After using the button ``New'', below the instance class table, a new dialogue is displayed. It allows the \textbf{user} to create a new class, by defining the three following input fields.
+\marginlabel{Create instance class}\label{createInstanceClass} After using the button ``New'' below the instance class table a new dialog is displayed. It allows the \textbf{user} to create a new class, by defining the three following input fields.
 \begin{enumerate}
 	\item Name: In this field the name of the new instance class has to be declared.
 	\item Description: By filling out this optional field, the \textbf{user} specifies the new instance class.
 	\item It is possible to  add the new class as a sub class of an existing class. The \textbf{user} can choose a parent class via the button Select. If no parent class is selected, the class is created as a root. The button ``Remove'', deletes the choosen parent class.
 \end{enumerate}
 
-The button ``Create'' finally creates the instance class and adds it to the \edacc database. \attention If the button ``Cancel'' is used, the dialogue will be closed without any changes.
+The button ``Create'' finally creates the instance class and adds it to the \edacc database. \attention If the button ``Cancel'' is used, the dialog will be closed without any changes.
 
-\marginlabel{Edit instance class} To change the name, description or parent class of an existing instance class, the \textbf{user} has to select a single class and use the button ``Edit''. The button ``Edit'' is located below the instance class table. The displayed dialogue is similarly to the one descriped in ``Create instance class'' \ref{createInstanceClass}, filled with the values of the selected class and a ``Edit'' button instead of the ``Create'' button.
+\marginlabel{Edit instance class} To change the name, description or parent class of an existing instance class, the \textbf{user} has to select a single class and use the button ``Edit''. The button ``Edit'' is located below the instance class table. The displayed dialog is similiar to the one descriped in ``Create instance class'' \ref{createInstanceClass}. The input fields are filled with the values of the selected class and a ``Edit'' button is displayed instead of the ``Create'' button.
 
-\marginlabel{Remove instance class} Using the button ``Remove'', located below the instance class table, deletes the selected instance classes with all of their children and related instances.  If the last occurrence of an instance is deleted, it is finally removed from the database.
+\marginlabel{Remove instance class} Using the button ``Remove'' located below the instance class table deletes the selected instance classes with all of their children and related instances.  If the last occurrence of an instance is deleted, it is finally removed from the database.
 
-\marginlabel{Export instance class} The \textbf{user} has to select the instance class and click the button ``Export'', to export the selected class. After using the button, the \textbf{user} has to choose the export directory. Every single class is exported as a folder, containing the child classes and  their related instances.
+\marginlabel{Export instance class} The \textbf{user} has to select the instance class and click the button ``Export'', to export the selected class. After using the button, the \textbf{user} has to choose the export directory. Every single class is exported as a folder containing the child classes and  their related instances.
 
 

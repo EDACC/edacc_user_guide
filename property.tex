@@ -1,63 +1,63 @@
 \subsection{Property}
-The management of result and instance properties is located at the menu bar, below the menu ``Property''. There are two menu items, called ``Import from CSV'' and ``Manage Properties''.
+The management of result and instance properties is located at the menu bar below the menu ``Property''. There are two menu items called ``Import from CSV'' and ``Manage Properties''.
 
 \subsubsection{Import from CSV}
-After choosing the menu item ``Import from CSV'' , a file chooser opens and the \textbf{user} has to select the CSV file to import. The next displayed dialogue is seperated into two  different tables:
+After choosing the menu item ``Import from CSV''  a file chooser opens and the \textbf{user} has to select the CSV file to import. The next displayed dialog is seperated into two  different tables:
 \begin{enumerate}
-	\item CSV Property: The name of properties found in the CSV file. The names are identified from the first line of the choosen file.
-	\item \edacc Property: A list of properties, avaible in the system. The user has to link the CSV properties with avaible system properties by using the checkboxes. 
+	\item CSV Property: The name of properties found in the CSV file. The names are identified from the first line of the chosen file.
+	\item \edacc Property: A list of properties, available in the system. The user has to link the CSV properties with avaible system properties by using the checkboxes. 
 \end{enumerate}
 
 \marginlabel{Import CSV data}
-After linking the CSV and \edacc properties, the \textbf{user} can import the data from the CSV file to the system using the button ``Import''. If existing data in the system should be replaced by the new imported data, the \textbf{user} has to choose ``Overwrite property data''.
+After linking the CSV and \edacc propertie, the \textbf{user} can import the data from the CSV file to the system using the button ``Import''. If existing data in the system should be replaced by the new imported data the \textbf{user} has to choose ``Overwrite property data''.
 \attention The data of a CSV property with no link to an existing property will not be added to the System. The \textbf{user} can also drop a CSV property by selecting one and using the button ``Drop''.
 
 \marginlabel{Manage \edacc properties}
-By pressing the button ``Manage'', located below the System property table, the Manage Properties dialogue, descriped in \ref{mangageProperties} ``Manage properties'', are displayed.
+By pressing the button ``Manage'', the ``Manage properties'' dialog is displayed, which is described in \ref{mangageProperties}. 
 
 \subsubsection{Manage properties} \label{mangageProperties} 
-This dialogue provides  the creation, removal and modification of properties to the \textbf{user}. The dialouge is structured into two parts:
+This dialog provides  the creation, removal and modification of properties to the \textbf{user}. The dialouge is structured into two parts:
 \begin{enumerate}
-	\item Property overview: A table that displays all avaible result and instance properties.
-	\item Property details: Some input fields, showing detailed information of the selected property to the \textbf{user}, for example ``Property name'' or ``Description'. These input fields are also used during the creation of new properties. 
+	\item Property overview: A table that displays all available result and instance properties.
+	\item Property details: Some input fields showing detailed information of the selected property to the \textbf{user}, for example ``Property name'' or ``Description'. These input fields are also used during the creation of new properties. 
 \end{enumerate}
 
 \marginlabel{Create property}
-By using the button ``New'' a new property is created. The button is located at the bottom of the dialogue. The new property  is defined by the following values, which have to be specified by the \textbf{user}:
+By using the button ``New'' a new property is created. The button is located at the bottom of the dialog. The new property  is defined by the following values, which have to be specified by the \textbf{user}:
 \begin{enumerate}
 	\item Property type: Two different types of properties are defined in \edacc, instance and result properties. 
-	\item Name: The name of the new property, like ``Number of variables'' for a instance property.
-	\item Description: An optional field, to specify the property and it's function.
-	\item Property source: The choice of sources depends on the chosen type of the property. If instance property is selected, the \textbf{user} can choose between ``Instance'' (The instance file), ``InstanceName'' (Name of the Instance), ``ExperimentResult'' (The results from a calculated Experiment) and ``CSVImport'' (Only imported values, no calculation possible). For result properties, the \textbf{user} can choose between the four different outputs of an experiment, the ``Launcher''-, ``Solver''-, ``Verifier''- and ``WatcherOutput''. The property source defines the data resource from which the property values are calculated. 
-	\item Calculation types: There are two possibilities to calculate a property, using an external script, program or via a regular expression. To use regular expressions, select ``Regular Expression'' and define one or more regular expressions into the textfield on the leftside of the selection button. Are more than one regular expressions used, the \textbf{user} has to seperate them with a new line. Or if the \textbf{user} wants to use an external script, he has to select ``Computation Method'', choose the computation method and define some parameters for the execution of the external script. \attention The defintion of parameters is optional.
-	\item Value type: Choose the data type of the caluclated property values to afford their processing and displaying in the GUI. \edacc provides four default value types, ``String'', ``Float'', ``Integer'' and ``Long''. The \textbf{user} can expand the list of value types by adding new value types. This process is  explained at \ref{definePropertyValuetype} ``Define property value type''. 
+	\item Name: The name of the new property like ``Number of variables'' for an instance property.
+	\item Description: An optional field to specify the property and it's function.
+	\item Property source: The choice of sources depends on the chosen type of the property. If instance property is selected the \textbf{user} can choose between ``Instance'' (the instance file), ``InstanceName'' (name of the Instance), ``ExperimentResult'' (the results from a calculated Experiment) and ``CSV Import'' (only imported values, no calculation possible). For result properties, the \textbf{user} can choose between the four different outputs of an experiment: the ``Launcher''-, ``Solver''-, ``Verifier''- and ``WatcherOutput''. The property source defines the data resource from which the property values are calculated. 
+	\item Calculation types: There are two possibilities to calculate a property using an external script, program or via a regular expression. To use regular expressions select ``Regular Expression'' and define one or more regular expressions into the textfield on the leftside of the selection button. If there are more than one regular expression used the \textbf{user} has to seperate them with a new line. In Case the \textbf{user} wants to use an external script he has to select ``Computation Method'', choose the computation method and define some parameters for the execution of the external script. \attention The defintion of parameters is optional.
+	\item Value type: Choose the data type of the caluclated property values to afford their processing and displaying in the GUI. \edacc provides four default value types: ``String'', ``Float'', ``Integer'' and ``Long''. The \textbf{user} can expand the list of value types by adding new value types. This process is  explained at \ref{definePropertyValuetype} ``Define property value type''. 
 	\item Multiple occurrences: With this option the \textbf{user} can specify if the property occurres single or multiple times in a single property source object. 
 \end{enumerate} 
-\attention The new property is not saved until the button ``Save' is used. If the \textbf{user} selects a property or use the button ``New'' at the bottom side of the dialogue, the input in the fields are deleted. 
+\attention The new property is not saved until the button ``Save'' is used. If the \textbf{user} selects a property or uses the button ``New'' at the bottom side of the dialog, the input in the fields are deleted. 
 
 \marginlabel{Remove property}
-The \textbf{user} can remove an existing property from \edacc, by  selecting the property and use of the button ``Remove''.
+The \textbf{user} can remove an existing property from \edacc by  selecting the property and use of the button ``Remove''.
 
 \marginlabel{Import property}
-Properties exported with the GUI can be imported via the button ``Import'' , located at the bottom of the dialogue. The \textbf{user} has to select the file to import with the displayed file chooser. This feature, combined with the export function of properties, allows \textbf{users} to share properties.
+Properties exported with the GUI can be imported via the button ``Import'', located at the bottom of the dialog. The \textbf{user} has to select the file to import with the displayed file chooser. This feature combined with the export function of properties allows \textbf{users} to share properties.
 
 \marginlabel{Export property}
 Allows the \textbf{user} to export properties to other \edacc systems.
 
 \marginlabel{Define property value type}\label{definePropertyValuetype}
-To create new value types of the property values, the button ``New'' has to be used. The shown dialogue enables two functions to the \textbf{user}:
+To create new value types of the property values, the button ``New'' has to be used. The shown dialog enables two functions to the \textbf{user}:
 \begin{enumerate}
-	\item Add: By selecting the jar archive, containing implementations of the java interface class ``PropertyValueType'', new value types can be added to the \edacc system. The \textbf{user} has to select the corresponding java classes of the value types from the lis, displaying all found classes of the jar archive.
+	\item Add: By selecting the jar archive containing implementations of the java interface class ``PropertyValueType'', new value types can be added to the \edacc system. The \textbf{user} has to select the corresponding java classes of the value types from the list, displaying all found classes of the jar archive.
 	\item Remove: Only \textbf{user} defined value types can be deleted via the ``Remove'' button. Value types declared default cannot be removed.
 \end{enumerate}
 
 \marginlabel{Add computation Method}
-After using the button ``New'' on the left side of the label ``Computation method'', a dialogue divided into a table, containing all avaible computation methods, and a form for a detailed view of the computation methods is shown. To add a computation method, the user has to use the button ``New'', below the overview table and fill in the three input fields:
+After using the button ``New'' on the left side of the label ``Computation method'', a dialog divided into a table, containing all avaible computation methods and a form for a detailed view of the computation methods is shown. To add a computation method the \textbf{user} has to use the button ``New'' below the overview table and fill in the three input fields:
 \begin{enumerate}
 	\item Name: Defines the name of the new computation method.
-	\item Description: It is an optional field to comment and specifiy the computation method.
+	\item Description: It is an optional field to comment and specify the computation method.
 	\item Binary: The \textbf{user} has to choose the binary of the computation method via a file chooser.
 \end{enumerate}
 \attention The input of the new computation method is not saved until the button ``Save'' is pressed. 
 
-\attention The external script or program of the computation method recieves the data to process via standard input  and has to commit the results via standard output. \edacc will call the computation method with only a single object, like an instance file, terminate and restart it with the next source object.
+\attention The external script or program of the computation method receives the data to process via standard input  and has to commit the results via standard output. \edacc will call the computation method with only a single object - like an instance file - terminate and restart it with the next source object.
