@@ -53,13 +53,11 @@ username = dbusername
 password = dbpassword
 database = dbname
 gridqueue = 3
-verifier = ./verifiers/SAT
+jobserver_host = jobserver.host.foo.com
+jobserver_port = 3307
 \end{verbatim}
 \index{Grid queue}
-Note that the gridqueue value is simply the ID of the grid queue. Another (optional) configuration option is the verifier line. It tells the client if it should run a program on the output that a
-solver generated. For example, if your experiments consist of attempting to solve boolean propositional logic formulas you can use a SAT verifier that tests if the solution given by a solver
-is actually correct. The verifier configuration option is simply a path to an executable that the client calls with standardized parameters. See section \ref{sec:verifiers} for more information on verifiers.
-
+Note that the gridqueue value is simply the ID of the grid queue.
 
 Beside the configuration file there are several command line options the client accepts, please also see ''./client --help'':
 \marginlabel{Command line arguments:}
@@ -82,12 +80,20 @@ Beside the configuration file there are several command line options the client 
   uploading to the DB. Default behaviour is to delete them.
 -b <path>:
   Base path for creating temporary directories and files.
+-d <path>:
+  Download path for resources. If the download path is a shared filesystem,
+  all clients with access to it will only need to download files once and then
+  copy them to their own base path.
 -h:
   Toggles whether the client should continue to run even
   though the CPU hardware of the grid queue is not homogenous.
 -s:
   Enables simulation mode where the client will fetch and run
   jobs but won't write any results back to the database.
+-t:
+  Expects walltime in the format [[[d:]h:]m:]s, you can let the client
+  know how long it will be able to run on the system. The expected time left
+  will then also show up in the GUI.
 \end{verbatim}
 
 Verbosity controls the amount of log output the client generates. A value of 4 is only useful for debugging purposes, a value of 0 will make the client log important messages and all errors.
