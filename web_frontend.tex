@@ -193,3 +193,65 @@ which is displayed next to the filter text field.
 \marginlabel{Ranking of solver configurations}
 \index{Ranking}
 The ranking is determined by the number of successful runs but the ranking table can be sorted by any of the displayed measures.
+
+
+\subsection{Result pages}
+\begin{figure}
+\centering
+\includegraphics[width=8cm]{progress_table.png}
+\caption{Live result browser showing the jobs of an experiment on SAT solvers. The ''Flips'' result property column contains the values of the number of local search steps performed by the solver.}
+\label{fig:progress_table}
+\end{figure}
+The main web page gives a list of experiments that are in the database along with information about the experiment's date, number of solver configurations, instances and attempts.
+Each experiment in the list links to a web page that provides links to various web pages with further information, results and analysis tools.
+
+The \emph{Live information about experiment progress} page displays a table of the experiment's jobs in rows with several columns for the attributes of a job.
+By default, the unique ID of a job, its solver configuration, instance and run number, run time, seed, status and result code in textual form, are displayed.
+Additionally, for each result property in the database there's a column with the property value of the job, if it was already calculated and is present in the database.
+The job data is retrieved from the database on each page refresh and directly reflects the computation progress of an experiment.
+Aside from browsing the table, which includes sorting and filtering for some of the columns, the table data can also be downloaded in CSV format\footnote{comma-separated values} for
+processing with other tools.
+The ID is also a link that leads to a \emph{detailed result} page for the job. This page displays links to the solver configuration and instance of the job and the values of all result properties, if they are calculated. The solver, launcher, watcher and verifier output is displayed as well but each truncated to a reasonable size, only showing the first and last few hundred
+characters. Links allow the user to download the entire files.
+
+The ''list of solver configurations used'' page displays the list of solver configurations that are part of the experiment. For each solver configuration
+a page with details about the solver and the arguments can be accessed.
+The ''list of instances used'' page displays the list of instances used in the experiment in a table. There are columns for the name, md5 checksum and additional columns for each
+instance property defined in the database. Each instance has a link to a page that displays the first and last few hundred characters of the instance file and allows to download
+the entire file.
+
+There are three pages that display the results of an experiment in different formats:
+\begin{enumerate}
+\item By solver configuration: Allows the user to select a solver configuration and then displays a table with the solver configuration's run time results of all attempts on the instances
+of the experiment. The results are links to the detailed result pages of the corresponding jobs.
+\item By instance: Allows the user to select an instance and then displays a table with the run time results of all attempts of the solver configurations of the experiment.
+\item By solver configuration and instance: Displays a table with the instances of the experiment as rows and the solver configurations as columns.
+If there's only one attempt for each solver on an instance, the cell corresponding to a particular solver configuration and instance displays the
+run time of the single attempt and it's result code in textual form. If there are multiple attempts, each cell contains descriptive statistics such as the
+median, minimum, maximum and average run time, as well as its standard deviation, over all attempts. A link in each cell leads to a table with the results of all attempts.
+\end{enumerate}
+The data of the tables displayed in the two result pages mentioned first can be downloaded in CSV format.
+
+\subsection{Analysis pages}
+The statistical methods implemented were described in chapter \ref{chap:analysis} in detail. In the web frontend they are made available on pages that are accessible from an experiment's main page. Each has a form that allows the user to set the parameters of the plots and tests, for example which solver configurations and instances to include. After submitting the form the pages display the results of the tests or the plots.
+\begin{figure}
+\centering
+\includegraphics[width=9cm]{SAT_Competition_scenario_cactus}
+\caption{Cactus plot}
+\label{fig:cactus}
+\end{figure}
+The following tests and plots are implemented in the web frontend:
+\begin{itemize}
+\item Box plots: The form allows the selection of the result property and the solver configurations and instances of which the results should be plotted. After submitting the form the box plot is displayed.
+\item Scatter plot - One result property of two solvers: The form allows the selection of the two solver configurations, the instances and whether to plot single runs, all runs or average or median values.
+\item Scatter plot - Two result properties of a solver: The form allows the user to select the solver configuration, the instances and whether to plot single runs, all runs or average or median values.
+\item Scatter plot - Result property against instance property: A form allows to select the solver configuration, result property, instance property and whether to plot single runs, all runs or average or median values.
+\item Distribution and Kernel Density Estimation: After selecting the solver configuration, instance and result property the plots of the empirical distribution function and the kernel density estimation are displayed.
+\item Property distribution comparison of two solvers on an instance: A form allows to select two solver configurations, the instance and the result property. After submitting the form data, a plot of both property distributions and the results of the two hypothesis tests described in the last chapter are displayed. For both tests, the null hypothesis, the alternative hypothesis, the test statistic, the p-value and the conclusion about whether to accept or reject the null hypothesis at significance level $0.05$ are calculated and displayed.
+\item Property distributions of solvers on an instance: After selecting several solver configurations, an instance and a result property, the result property distributions are displayed in a single plot.
+\item Cactus plot: Cactus plots show the number of attempts a solver configuration would be able to finish successfully if it is restricted to a certain amount of a result property on every attempt. For example, the number of successful runs if given a certain amount of time (see Figure~\ref{fig:cactus}).
+\item Probabilistic domination: After selecting two solver configurations and a result property the instances are split into the three categories of probabilistic domination as described in chapter~\ref{chap:analysis}.
+\end{itemize}
+The \emph{Pearson product-moment correlation coefficient} and \emph{Spearman's rank correlation coefficient} are calculated for the data of the scatter plots and displayed next to them.
+All plots are rendered in PNG\footnote{Portable Network Graphics} format for presentation on the web pages and can be downloaded by the user as PDF and EPS\footnote{Encapsulated Postscript} images
+for further use. Additionally, the numeric data that is used to generate the plots can be downloaded in CSV format.
